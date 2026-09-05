@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f8f9ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-tint": "#006c49", "secondary": "#565e74", "primary": "#006c49", "primary-container": "#10b981", "secondary-fixed": "#dae2fd", "on-secondary-fixed": "#131b2e", "primary-fixed": "#6ffbbe", "surface-container-high": "#dce9ff", "on-tertiary-fixed-variant": "#653e00", "inverse-on-surface": "#eaf1ff", "on-surface-variant": "#3c4a42", "on-primary-fixed-variant": "#005236", "on-surface": "#0b1c30", "surface-bright": "#f8f9ff", "secondary-container": "#dae2fd", "on-error-container": "#93000a", "on-tertiary-container": "#523200", "background": "#f8f9ff", "inverse-primary": "#4edea3", "primary-fixed-dim": "#4edea3", "on-secondary-container": "#5c647a", "tertiary-fixed-dim": "#ffb95f", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "on-primary-fixed": "#002113", "outline": "#6c7a71", "secondary-fixed-dim": "#bec6e0", "error": "#ba1a1a", "on-primary-container": "#00422b", "surface-container-highest": "#d3e4fe", "on-background": "#0b1c30", "tertiary": "#855300", "surface": "#f8f9ff", "on-error": "#ffffff", "surface-container-low": "#eff4ff", "surface-container": "#e5eeff", "outline-variant": "#bbcabf", "tertiary-fixed": "#ffddb8", "tertiary-container": "#e29100", "surface-variant": "#d3e4fe", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "inverse-surface": "#213145", "on-secondary-fixed-variant": "#3f465c", "surface-dim": "#cbdbf5", "on-primary": "#ffffff", "on-tertiary-fixed": "#2a1700" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "unit-5": "1.25rem", "desktop-max-w": "480px", "unit-8": "2rem", "unit-4": "1rem", "unit-1": "0.25rem", "unit-2": "0.5rem", "mobile-gutter": "0.75rem", "mobile-margin": "1rem", "unit-6": "1.5rem", "unit-3": "0.75rem", "unit-10": "2.5rem", "unit-12": "3rem" }, "fontFamily": { "mono-currency-md": ["JetBrains Mono"], "mono-currency-lg": ["JetBrains Mono"], "display-hero-mobile": ["Inter"], "headline-lg": ["Inter"], "display-hero": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"], "body-sm": ["Inter"], "label-caps": ["Inter"], "headline-sm": ["Inter"] }, "fontSize": { "mono-currency-md": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "mono-currency-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface text-on-surface flex flex-col items-center min-h-screen"><div class="w-full max-w-[480px] relative flex flex-col min-h-screen bg-surface"><header class="fixed top-0 max-w-[480px] w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-mobile-margin flex items-center justify-between gap-unit-2"><div class="flex items-center gap-unit-2 min-w-0"><img alt="Expense Tracker PWA Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VnYWc3VLn8b4pZnqWplj3VvcvlL5QNNVrDGbm48WyFTePFVPJA_OPDLLiaMcohKfsnK4SXGxgKyPQOZEsbN08jfBSxGbfcJDtFAxZLBfy2WgYsTeUMqO5fGfLmCQWhkecoEBDOLdTupIhK4ezJQH0boVhqcSfpGX_MAui98Yir4ngcjcM8YFKJKrpf6qPF6GSYpm0M9aoekIHi5sJbQAcsYhHCnujHwdZ8Yy_TJYcdWiJH-XM4ovVa1A"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate leading-tight">FinFlow PWA</span><div class="flex items-center gap-1 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant truncate uppercase">Firestore Synced</span></div></div></div><div class="flex items-center gap-unit-2 shrink-0"><span class="font-headline-sm text-headline-sm text-on-surface-variant hidden">Dashboard</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full px-mobile-margin pt-16 pb-28 bg-surface"><div class="flex flex-col w-full gap-unit-4 pb-6">
+<!-- Period & Synced Pill Top Bar -->
+<section class="flex items-center justify-between gap-unit-2">
+<!-- Period Picker Capsule -->
+<div class="inline-flex items-center bg-surface-container rounded-full p-1 shadow-sm">
+<button class="px-unit-3 py-1.5 rounded-full font-label-caps text-label-caps text-on-surface-variant transition-all duration-200" id="btn-period-weekly">
+        Mingguan
+      </button>
+<button class="px-unit-3 py-1.5 rounded-full font-label-caps text-label-caps bg-primary text-on-primary shadow-sm transition-all duration-200" id="btn-period-monthly">
+        Sep 2026
+      </button>
+</div>
+<!-- Status Pill with pulse indicator -->
+<div class="flex items-center gap-1.5 px-unit-3 py-1.5 rounded-full bg-primary-fixed/50 text-on-primary-fixed-variant shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider font-semibold">Aman (62%)</span>
+</div>
+</section>
+<!-- Main Hero Budget Card -->
+<section class="relative overflow-hidden bg-surface-container-lowest rounded-2xl p-unit-5 shadow-sm">
+<!-- Ambient tint accent -->
+<div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-primary-fixed/20 pointer-events-none blur-2xl"></div>
+<div class="flex items-start justify-between relative z-10">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Sisa Anggaran Belanja</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Rp</span>
+<span class="font-display-hero-mobile text-display-hero-mobile text-on-surface font-mono-currency-lg tracking-tight">1.520.000</span>
+</div>
+</div>
+<div class="p-2 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">wallet</span>
+</div>
+</div>
+<!-- Progress Meter with Milestone -->
+<div class="mt-4 relative z-10">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Terpakai Rp 2.480.000</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Total Rp 4.000.000</span>
+</div>
+<!-- Track bar -->
+<div class="relative h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<!-- Warning checkpoint pin line at 80% -->
+<div class="absolute top-0 bottom-0 left-[80%] w-0.5 bg-tertiary-container/70 z-20" title="Ambang Waspada 80%"></div>
+<!-- Progress Fill: 62% -->
+<div class="h-full bg-primary-container rounded-full transition-all duration-700 ease-out" style="width: 62%;"></div>
+</div>
+<div class="flex justify-between items-center mt-1 text-on-surface-variant font-label-caps text-label-caps">
+<span>0%</span>
+<span class="text-tertiary font-medium">Batas Waspada 80%</span>
+<span>100%</span>
+</div>
+</div>
+<!-- Safe to Spend Daily Callout -->
+<div class="mt-unit-4 pt-3 flex items-center justify-between bg-surface-container-low/70 rounded-xl px-unit-3 py-2 relative z-10">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-primary-fixed/60 text-on-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">event_repeat</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant leading-none">Aman Dibelanjakan / Hari</p>
+<p class="font-mono-currency-md text-mono-currency-md font-semibold text-primary mt-0.5">Rp 60.800 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">/ hari</span></p>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-secondary font-medium">25 hari sisa</span>
+</div>
+</section>
+<!-- Quick Action Row (Thumb Zone Priority) -->
+<section class="flex items-center gap-unit-2">
+<button class="flex-1 min-h-[48px] h-12 bg-primary text-on-primary rounded-xl font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[22px]">edit_note</span>
+<span>+ Catat Pengeluaran</span>
+</button>
+<button aria-label="Scan Struk" class="min-w-[48px] min-h-[48px] w-12 h-12 bg-surface-container-lowest text-on-surface rounded-xl flex items-center justify-center shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant">document_scanner</span>
+</button>
+<button aria-label="Atur Anggaran" class="min-w-[48px] min-h-[48px] w-12 h-12 bg-surface-container-lowest text-on-surface rounded-xl flex items-center justify-center shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant">tune</span>
+</button>
+</section>
+<!-- Category Breakdown Section -->
+<section class="flex flex-col gap-unit-2">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">Plafon Kategori</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+<span class="font-body-sm text-body-sm text-primary font-medium">Atur Kuota</span>
+</div>
+<div class="grid grid-cols-1 gap-unit-2">
+<!-- Item 1: Makanan & Minuman (72%) -->
+<div class="bg-surface-container-lowest rounded-xl p-unit-3 shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface leading-tight">Makanan &amp; Minuman</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">72% terpakai</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-currency-md text-mono-currency-md text-on-surface">Rp 1.150.000</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">dari Rp 1.6jt</p>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 72%;"></div>
+</div>
+</div>
+<!-- Item 2: Transportasi (70%) -->
+<div class="bg-surface-container-lowest rounded-xl p-unit-3 shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">commute</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface leading-tight">Transportasi</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">70% terpakai</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-currency-md text-mono-currency-md text-on-surface">Rp 420.000</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">dari Rp 600rb</p>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 70%;"></div>
+</div>
+</div>
+<!-- Item 3: Tagihan & Utilitas (81% - Warning Tag) -->
+<div class="bg-surface-container-lowest rounded-xl p-unit-3 shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[20px]">electric_bolt</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<p class="font-headline-sm text-headline-sm text-on-surface leading-tight">Tagihan &amp; Utilitas</p>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container text-on-tertiary font-label-caps text-[10px] leading-tight font-bold">Waspada 81%</span>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary font-medium">Mendekati limit</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-currency-md text-mono-currency-md text-tertiary font-semibold">Rp 650.000</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">dari Rp 800rb</p>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full" style="width: 81%;"></div>
+</div>
+</div>
+<!-- Item 4: Belanja & Hiburan (26%) -->
+<div class="bg-surface-container-lowest rounded-xl p-unit-3 shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface leading-tight">Belanja &amp; Hiburan</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">26% hemat</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-currency-md text-mono-currency-md text-on-surface">Rp 260.000</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">dari Rp 1.0jt</p>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 26%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Ledger Entries Grouped -->
+<section class="flex flex-col gap-unit-2 mt-1">
+<div class="flex items-center justify-between px-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Transaksi Terkini</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Terupdate Real-Time</span>
+</div>
+<!-- Group: Hari ini -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant px-1 mt-1">Hari Ini</span>
+<!-- TX 1 -->
+<div class="min-h-[60px] bg-surface-container-lowest rounded-xl p-unit-3 flex items-center justify-between shadow-sm active:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">coffee</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Kopi &amp; Roti Siang</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Makanan • 13:20</span>
+</div>
+</div>
+<span class="font-mono-currency-md text-mono-currency-md text-on-surface shrink-0 font-medium">−Rp 35.000</span>
+</div>
+<!-- TX 2 -->
+<div class="min-h-[60px] bg-surface-container-lowest rounded-xl p-unit-3 flex items-center justify-between shadow-sm active:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[22px]">local_gas_station</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Bensin Motor</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Transport • 08:45</span>
+</div>
+</div>
+<span class="font-mono-currency-md text-mono-currency-md text-on-surface shrink-0 font-medium">−Rp 50.000</span>
+</div>
+</div>
+<!-- Group: Kemarin -->
+<div class="flex flex-col gap-1.5 mt-1">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant px-1">Kemarin</span>
+<!-- TX 3 -->
+<div class="min-h-[60px] bg-surface-container-lowest rounded-xl p-unit-3 flex items-center justify-between shadow-sm active:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">storefront</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Belanja Bulanan Mart</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kebutuhan Pokok • 19:10</span>
+</div>
+</div>
+<span class="font-mono-currency-md text-mono-currency-md text-on-surface shrink-0 font-medium">−Rp 320.000</span>
+</div>
+</div>
+<!-- See all ledger link -->
+<a class="w-full min-h-[44px] py-2.5 rounded-xl bg-surface-container-low text-primary font-headline-sm text-headline-sm flex items-center justify-center gap-1.5 text-center transition-all active:scale-[0.99] mt-1" href="#">
+<span>Lihat Semua Transaksi</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</section>
+<!-- Technical PWA Offline Persistence Footer Status -->
+<section class="mt-2 flex items-center justify-center gap-2 py-2 px-unit-3 rounded-lg bg-surface-container/60">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Terhubung &amp; Tersimpan Lokal (IndexedDB)</span>
+<span class="material-symbols-outlined text-primary text-[16px]">cloud_done</span>
+</section>
+</div>
+<script>
+  // Micro-interaction toggle for Period Selection
+  (function initDashboardPeriodToggle() {
+    const weeklyBtn = document.getElementById('btn-period-weekly');
+    const monthlyBtn = document.getElementById('btn-period-monthly');
+
+    if (!weeklyBtn || !monthlyBtn) return;
+
+    weeklyBtn.addEventListener('click', () => {
+      weeklyBtn.classList.remove('text-on-surface-variant');
+      weeklyBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+
+      monthlyBtn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+      monthlyBtn.classList.add('text-on-surface-variant');
+    });
+
+    monthlyBtn.addEventListener('click', () => {
+      monthlyBtn.classList.remove('text-on-surface-variant');
+      monthlyBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+
+      weeklyBtn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+      weeklyBtn.classList.add('text-on-surface-variant');
+    });
+  })();
+</script></main><nav class="fixed bottom-0 max-w-[480px] w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.04)]" data-active-classes="text-primary"><div class="flex justify-around items-center h-16 px-unit-2 relative"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 transition-colors text-primary" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">dashboard</span><span class="font-label-caps text-label-caps mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="transaksi" href="#"><span class="material-symbols-outlined text-[24px]">receipt_long</span><span class="font-label-caps text-label-caps mt-0.5">Transaksi</span></a><div class="relative -top-3 flex items-center justify-center"><a class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-container text-on-primary shadow-[0_4px_12px_rgba(16,185,129,0.35)] active:scale-95 transition-transform" data-path="quick-entry" href="#"><span class="material-symbols-outlined text-[28px]">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="budget" href="#"><span class="material-symbols-outlined text-[24px]">donut_large</span><span class="font-label-caps text-label-caps mt-0.5">Budget</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[24px]">tune</span><span class="font-label-caps text-label-caps mt-0.5">Settings</span></a></div></nav></div></body></html>

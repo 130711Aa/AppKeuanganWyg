@@ -1,0 +1,468 @@
+/* FinFlow PWA - Custom Fintech Precision Styling */
+
+:root {
+  --primary: #006c49;
+  --primary-container: #10b981;
+  --surface: #f8f9ff;
+  --surface-lowest: #ffffff;
+  --surface-low: #eff4ff;
+  --surface-container: #e5eeff;
+  --on-surface: #0b1c30;
+  --on-surface-variant: #3c4a42;
+  --secondary: #565e74;
+  --tertiary: #855300;
+  --tertiary-container: #e29100;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+}
+
+/* Base resets & ergonomics */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9ff;
+  color: #0b1c30;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+input, textarea {
+  user-select: auto;
+}
+
+/* Safe areas */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 8px);
+}
+
+/* Scrollbar utilities */
+::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  background: transparent;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tabular figures for clean financial typography */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.font-mono-currency {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  letter-spacing: -0.01em;
+}
+
+/* Micro-interaction active feedback */
+.active-press:active {
+  transform: scale(0.96);
+  transition: transform 0.1s ease;
+}
+
+.active-bounce:active {
+  transform: scale(0.92);
+  transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Glassmorphic surfaces */
+.glass-nav {
+  background: rgba(248, 249, 255, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-modal {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Custom range slider styling */
+input[type=range] {
+  -webkit-appearance: none;
+  background: #e5eeff;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #006c49;
+  cursor: pointer;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  transition: transform 0.1s ease;
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+  transform: scale(1.18);
+}
+
+/* Fintech Segmented Pill Controls */
+.pill-track {
+  background-color: #e8f1fc;
+  border-radius: 9999px;
+  padding: 4px;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.pill-btn-active {
+  background-color: #ffffff !important;
+  color: #0b1c30 !important;
+  font-weight: 700 !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 8px rgba(11, 28, 48, 0.08) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.pill-btn-inactive {
+  background-color: transparent !important;
+  color: #475569 !important;
+  font-weight: 500 !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.pill-btn-inactive:hover {
+  color: #0b1c30 !important;
+}
+
+/* Minimalist Status Badges (Borderless with soft elevation) */
+.status-pill-safe {
+  background-color: #ecfdf5 !important;
+  color: #047857 !important;
+  box-shadow: 0 2px 6px -1px rgba(16, 185, 129, 0.16), 0 1px 3px -1px rgba(0, 0, 0, 0.04) !important;
+  border: none !important;
+}
+
+.status-pill-warning {
+  background-color: #fffbeb !important;
+  color: #b45309 !important;
+  box-shadow: 0 2px 6px -1px rgba(245, 158, 11, 0.18), 0 1px 3px -1px rgba(0, 0, 0, 0.04) !important;
+  border: none !important;
+}
+
+.status-pill-danger {
+  background-color: #fee2e2 !important;
+  color: #b91c1c !important;
+  box-shadow: 0 2px 6px -1px rgba(239, 68, 68, 0.16), 0 1px 3px -1px rgba(0, 0, 0, 0.04) !important;
+  border: none !important;
+}
+
+/* ==========================================
+   DARK MODE STYLING & THEMING
+   ========================================== */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #0b131e !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark main,
+html.dark .bg-surface {
+  background-color: #0f172a !important;
+}
+
+html.dark .bg-surface-container-lowest,
+html.dark [class*="bg-surface-container-lowest"] {
+  background-color: #1e293b !important;
+  border-color: rgba(51, 65, 85, 0.4) !important;
+}
+
+html.dark .bg-surface-container-low,
+html.dark [class*="bg-surface-container-low"] {
+  background-color: #0f172a !important;
+  border-color: rgba(51, 65, 85, 0.4) !important;
+}
+
+html.dark .bg-surface-container,
+html.dark [class*="bg-surface-container/"] {
+  background-color: #1e293b !important;
+}
+
+html.dark .text-on-surface {
+  color: #f8fafc !important;
+}
+
+html.dark .text-on-surface-variant {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-outline {
+  color: #64748b !important;
+}
+
+html.dark .border-slate-100,
+html.dark .border-slate-200 {
+  border-color: rgba(51, 65, 85, 0.5) !important;
+}
+
+html.dark header {
+  background-color: rgba(15, 23, 42, 0.88) !important;
+  border-color: rgba(51, 65, 85, 0.5) !important;
+}
+
+html.dark nav {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+  border-color: rgba(51, 65, 85, 0.5) !important;
+}
+
+html.dark .pill-track {
+  background-color: #162032 !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark .pill-btn-active {
+  background-color: #1e293b !important;
+  color: #6ffbbe !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark .pill-btn-inactive {
+  color: #94a3b8 !important;
+}
+
+html.dark .pill-btn-inactive:hover {
+  color: #f8fafc !important;
+}
+
+html.dark .status-pill-safe {
+  background-color: rgba(16, 185, 129, 0.16) !important;
+  color: #34d399 !important;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.1) !important;
+}
+
+html.dark .status-pill-warning {
+  background-color: rgba(245, 158, 11, 0.16) !important;
+  color: #fbbf24 !important;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.1) !important;
+}
+
+html.dark .status-pill-danger {
+  background-color: rgba(239, 68, 68, 0.18) !important;
+  color: #f87171 !important;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.1) !important;
+}
+
+html.dark .modal-backdrop > div {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark input:not([type="range"]):not([type="color"]),
+html.dark select {
+  background-color: #162032 !important;
+  color: #f8fafc !important;
+  border-color: rgba(51, 65, 85, 0.6) !important;
+}
+
+html.dark #keypad .key-btn {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(51, 65, 85, 0.4);
+}
+
+html.dark #keypad .key-btn:active {
+  background-color: #243247 !important;
+}
+
+/* ==========================================================================
+   Precision Range Sliders (Telemetry & Thresholds)
+   ========================================================================== */
+input[type="range"].custom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0 !important;
+}
+
+input[type="range"].custom-slider:focus {
+  outline: none;
+}
+
+/* Track Base - WebKit */
+input[type="range"].custom-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  transition: background 0.15s ease;
+}
+
+/* Track Base - Mozilla */
+input[type="range"].custom-slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  transition: background 0.15s ease;
+}
+
+/* Track Dynamic Progress - Warning (Amber) */
+input[type="range"].custom-slider.slider-warn::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #f59e0b var(--slider-fill, calc(8px + (100% - 16px) * 0.6667)), #cbd5e1 var(--slider-fill, calc(8px + (100% - 16px) * 0.6667)));
+}
+html.dark input[type="range"].custom-slider.slider-warn::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #f59e0b var(--slider-fill, calc(8px + (100% - 16px) * 0.6667)), #334155 var(--slider-fill, calc(8px + (100% - 16px) * 0.6667)));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Track Dynamic Progress - Critical (Red) */
+input[type="range"].custom-slider.slider-crit::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #ef4444 var(--slider-fill, calc(8px + (100% - 16px) * 0.5)), #cbd5e1 var(--slider-fill, calc(8px + (100% - 16px) * 0.5)));
+}
+html.dark input[type="range"].custom-slider.slider-crit::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #ef4444 var(--slider-fill, calc(8px + (100% - 16px) * 0.5)), #334155 var(--slider-fill, calc(8px + (100% - 16px) * 0.5)));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Mozilla Progress */
+input[type="range"].custom-slider.slider-warn::-moz-range-progress {
+  background-color: #f59e0b;
+  height: 6px;
+  border-radius: 9999px;
+}
+input[type="range"].custom-slider.slider-crit::-moz-range-progress {
+  background-color: #ef4444;
+  height: 6px;
+  border-radius: 9999px;
+}
+
+/* Thumb Base - WebKit */
+input[type="range"].custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  margin-top: -5px; /* (6px track - 16px thumb) / 2 = -5px */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"].custom-slider:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+/* Thumb Base - Mozilla */
+input[type="range"].custom-slider::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"].custom-slider:active::-moz-range-thumb {
+  transform: scale(1.2);
+}
+
+/* Thumb Colors & Active Glow */
+input[type="range"].slider-warn::-webkit-slider-thumb {
+  background-color: #f59e0b;
+}
+input[type="range"].slider-warn::-moz-range-thumb {
+  background-color: #f59e0b;
+}
+input[type="range"].slider-warn:active::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+input[type="range"].slider-crit::-webkit-slider-thumb {
+  background-color: #ef4444;
+}
+input[type="range"].slider-crit::-moz-range-thumb {
+  background-color: #ef4444;
+}
+input[type="range"].slider-crit:active::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+

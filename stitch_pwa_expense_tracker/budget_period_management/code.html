@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f8f9ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-tint": "#006c49", "secondary": "#565e74", "primary": "#006c49", "primary-container": "#10b981", "secondary-fixed": "#dae2fd", "on-secondary-fixed": "#131b2e", "primary-fixed": "#6ffbbe", "surface-container-high": "#dce9ff", "on-tertiary-fixed-variant": "#653e00", "inverse-on-surface": "#eaf1ff", "on-surface-variant": "#3c4a42", "on-primary-fixed-variant": "#005236", "on-surface": "#0b1c30", "surface-bright": "#f8f9ff", "secondary-container": "#dae2fd", "on-error-container": "#93000a", "on-tertiary-container": "#523200", "background": "#f8f9ff", "inverse-primary": "#4edea3", "primary-fixed-dim": "#4edea3", "on-secondary-container": "#5c647a", "tertiary-fixed-dim": "#ffb95f", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "on-primary-fixed": "#002113", "outline": "#6c7a71", "secondary-fixed-dim": "#bec6e0", "error": "#ba1a1a", "on-primary-container": "#00422b", "surface-container-highest": "#d3e4fe", "on-background": "#0b1c30", "tertiary": "#855300", "surface": "#f8f9ff", "on-error": "#ffffff", "surface-container-low": "#eff4ff", "surface-container": "#e5eeff", "outline-variant": "#bbcabf", "tertiary-fixed": "#ffddb8", "tertiary-container": "#e29100", "surface-variant": "#d3e4fe", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "inverse-surface": "#213145", "on-secondary-fixed-variant": "#3f465c", "surface-dim": "#cbdbf5", "on-primary": "#ffffff", "on-tertiary-fixed": "#2a1700" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "unit-5": "1.25rem", "desktop-max-w": "480px", "unit-8": "2rem", "unit-4": "1rem", "unit-1": "0.25rem", "unit-2": "0.5rem", "mobile-gutter": "0.75rem", "mobile-margin": "1rem", "unit-6": "1.5rem", "unit-3": "0.75rem", "unit-10": "2.5rem", "unit-12": "3rem" }, "fontFamily": { "mono-currency-md": ["JetBrains Mono"], "mono-currency-lg": ["JetBrains Mono"], "display-hero-mobile": ["Inter"], "headline-lg": ["Inter"], "display-hero": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"], "body-sm": ["Inter"], "label-caps": ["Inter"], "headline-sm": ["Inter"] }, "fontSize": { "mono-currency-md": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "mono-currency-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface text-on-surface flex flex-col items-center min-h-screen"><div class="w-full max-w-[480px] relative flex flex-col min-h-screen bg-surface"><header class="fixed top-0 max-w-[480px] w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-mobile-margin flex items-center justify-between gap-unit-2"><div class="flex items-center gap-unit-2 min-w-0"><img alt="Expense Tracker PWA Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VnYWc3VLn8b4pZnqWplj3VvcvlL5QNNVrDGbm48WyFTePFVPJA_OPDLLiaMcohKfsnK4SXGxgKyPQOZEsbN08jfBSxGbfcJDtFAxZLBfy2WgYsTeUMqO5fGfLmCQWhkecoEBDOLdTupIhK4ezJQH0boVhqcSfpGX_MAui98Yir4ngcjcM8YFKJKrpf6qPF6GSYpm0M9aoekIHi5sJbQAcsYhHCnujHwdZ8Yy_TJYcdWiJH-XM4ovVa1A"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate leading-tight">FinFlow PWA</span><div class="flex items-center gap-1 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant truncate uppercase">Firestore Synced</span></div></div></div><div class="flex items-center gap-unit-2 shrink-0"><span class="font-headline-sm text-headline-sm text-on-surface-variant hidden">Dashboard</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full px-mobile-margin pt-16 pb-28 bg-surface"><div class="flex flex-col w-full space-y-unit-5">
+<!-- Top Intro Section -->
+<section class="flex flex-col space-y-unit-2">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">FinFlow Controls</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Kelola Anggaran</h1>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">tune</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+      Kendalikan plafon belanja bulanan. Sinkronisasi cerdas otomatis memperbarui rollover saat aplikasi dibuka pertama kali tanpa komputasi server.
+    </p>
+<!-- Cycle Segmented Switcher -->
+<div class="grid grid-cols-3 gap-1.5 p-1 bg-surface-container rounded-xl">
+<button class="h-9 min-h-[36px] rounded-lg bg-surface-container-lowest text-on-surface font-headline-sm text-body-sm flex items-center justify-center shadow-sm transition-all" id="btn-period-monthly" type="button">
+        Bulanan
+      </button>
+<button class="h-9 min-h-[36px] rounded-lg text-on-surface-variant hover:text-on-surface font-body-md text-body-sm flex items-center justify-center transition-all" id="btn-period-weekly" type="button">
+        Mingguan
+      </button>
+<button class="h-9 min-h-[36px] rounded-lg text-on-surface-variant hover:text-on-surface font-body-md text-body-sm flex items-center justify-center transition-all" id="btn-period-custom" type="button">
+        Kustom
+      </button>
+</div>
+</section>
+<!-- Current Active Period Banner Card -->
+<section class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-unit-2">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">September 2026</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              Aktif
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 Sep – 30 Sep 2026</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-mono-currency-md text-mono-currency-md text-primary font-bold">25 Hari</span>
+<span class="block font-label-caps text-label-caps text-on-surface-variant">Tersisa</span>
+</div>
+</div>
+<!-- Progress indicator bar for elapsed days in month (5 of 30 days = ~17%) -->
+<div class="w-full bg-surface-container-low rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 17%;"></div>
+</div>
+</section>
+<!-- Total Budget Limit & Stepper Card -->
+<section class="p-unit-5 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-4">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Plafon Total Anggaran</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Batas komitmen belanja per siklus</span>
+</div>
+<button aria-label="Edit Plafon Total Manual" class="w-11 h-11 rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<!-- Editable Amount Display -->
+<div class="flex items-baseline gap-2 bg-surface-container-low p-unit-3 rounded-xl">
+<span class="font-headline-md text-headline-md text-on-surface-variant">Rp</span>
+<input aria-label="Nominal Total Anggaran" class="bg-transparent font-mono-currency-lg text-mono-currency-lg text-on-surface font-bold tracking-tight w-full focus:outline-none" id="total-budget-input" type="text" value="4.000.000"/>
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">check_circle</span>
+</div>
+<!-- Quick Stepper Chips (Thumb Friendly) -->
+<div class="flex items-center gap-unit-2">
+<button class="flex-1 h-11 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-sm active:scale-95 transition-transform flex items-center justify-center gap-1" onclick="adjustBudget(-500000)" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+<span>500rb</span>
+</button>
+<button class="flex-1 h-11 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-sm active:scale-95 transition-transform flex items-center justify-center gap-1" onclick="adjustBudget(500000)" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>500rb</span>
+</button>
+<button class="flex-1 h-11 rounded-xl bg-primary-fixed text-on-primary-fixed font-headline-sm text-body-sm active:scale-95 transition-transform flex items-center justify-center gap-1" onclick="adjustBudget(1000000)" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>1 Jt</span>
+</button>
+</div>
+</section>
+<!-- Client-side Safe Spark Rollover Status -->
+<section class="p-unit-4 rounded-2xl bg-surface-container-low shadow-sm flex flex-col space-y-unit-3">
+<div class="flex items-start gap-unit-3">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed shrink-0">
+<span class="material-symbols-outlined text-[22px]">bolt</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">On-Demand Period Rollover</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight mt-0.5">
+          Otomatis dibuat saat app dibuka pertama kali di awal periode (Client-side spark check tanpa Cloud Functions).
+        </p>
+</div>
+</div>
+<!-- Toggles with min 44px hitboxes -->
+<div class="space-y-2 pt-1">
+<div class="flex items-center justify-between min-h-[44px] px-unit-2 rounded-xl bg-surface-container-lowest">
+<span class="font-body-md text-body-md text-on-surface">Rollover Otomatis</span>
+<label class="relative inline-flex items-center cursor-pointer min-w-[44px] min-h-[44px] justify-end">
+<input checked="" class="sr-only peer" id="toggle-auto-rollover" type="checkbox"/>
+<div class="w-11 h-6 bg-secondary-fixed rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[12px] after:right-[22px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between min-h-[44px] px-unit-2 rounded-xl bg-surface-container-lowest">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Bawa Sisa Saldo Bulan Lalu</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">+Rp 340.000 dari Agustus</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer min-w-[44px] min-h-[44px] justify-end">
+<input checked="" class="sr-only peer" id="toggle-carryover" type="checkbox"/>
+<div class="w-11 h-6 bg-secondary-fixed rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[12px] after:right-[22px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Visual Warning Threshold Alert Sliders -->
+<section class="p-unit-5 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase">Telemetry Sentinel</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Batas Ambang Peringatan</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sensitivitas alert UI pengeluaran over-cap</span>
+</div>
+<!-- Zone Status Pill Bar Preview -->
+<div class="flex flex-col space-y-1.5">
+<div class="h-3 w-full rounded-full bg-surface-container flex overflow-hidden">
+<div class="bg-primary-container h-full transition-all" style="width: 80%;"></div>
+<div class="bg-tertiary-container h-full transition-all" style="width: 20%;"></div>
+<div class="bg-error h-full transition-all" style="width: 15%;"></div>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-label-caps text-label-caps">
+<span class="text-primary font-bold">Aman (0 - 80%)</span>
+<span class="text-tertiary font-bold">Waspada (80 - 100%)</span>
+<span class="text-error font-bold">Limit Kritis (100%+)</span>
+</div>
+</div>
+<!-- Threshold Slider 1: Warning 80% -->
+<div class="p-unit-3 rounded-xl bg-surface-container-low flex flex-col space-y-unit-2">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Peringatan Awal</span>
+</div>
+<span class="font-mono-currency-md text-mono-currency-md text-tertiary font-bold" id="threshold-val-1">80%</span>
+</div>
+<input aria-label="Slider Ambang Peringatan Awal" class="w-full accent-tertiary-container h-2 bg-surface-container rounded-lg cursor-pointer" max="95" min="50" oninput="updateThresholdNote(this.value, 1)" type="range" value="80"/>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span id="note-threshold-1">Notifikasi visual saat pengeluaran capai <strong>Rp 3.200.000</strong></span>
+</div>
+</div>
+<!-- Threshold Slider 2: Critical 100% -->
+<div class="p-unit-3 rounded-xl bg-surface-container-low flex flex-col space-y-unit-2">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Limit Kritis (Overbudget)</span>
+</div>
+<span class="font-mono-currency-md text-mono-currency-md text-error font-bold" id="threshold-val-2">100%</span>
+</div>
+<input aria-label="Slider Ambang Limit Kritis" class="w-full accent-error h-2 bg-surface-container rounded-lg cursor-pointer" max="110" min="90" oninput="updateThresholdNote(this.value, 2)" type="range" value="100"/>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span id="note-threshold-2">Peringatan visual &amp; haptik saat tembus <strong>Rp 4.000.000</strong></span>
+</div>
+</div>
+</section>
+<!-- Category Budget Allocations (Plafon Per Kategori) -->
+<section class="flex flex-col space-y-unit-3">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Plafon Per Kategori</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Terdistribusi Rp 4.000.000 (100%)</span>
+</div>
+<button class="px-3 h-9 min-h-[36px] rounded-xl bg-primary-fixed text-on-primary-fixed hover:bg-primary-container font-headline-sm text-body-sm flex items-center gap-1 shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Tambah</span>
+</button>
+</div>
+<!-- Category Card 1: Food & Beverage (72% Safe) -->
+<div class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-unit-3">
+<div class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[24px]">restaurant</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Makanan &amp; Minuman</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Limit Rp 1.600.000</span>
+</div>
+</div>
+<button aria-label="Edit Kategori Makanan" class="w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-baseline">
+<span class="font-mono-currency-md text-mono-currency-md text-on-surface font-semibold">Rp 1.150.000</span>
+<span class="font-label-caps text-label-caps text-primary font-bold">72% (Aman)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" style="width: 72%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sisa plafon: Rp 450.000</span>
+</div>
+</div>
+<!-- Category Card 2: Transport (70% Safe) -->
+<div class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-unit-3">
+<div class="w-11 h-11 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[24px]">directions_subway</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Transportasi</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Limit Rp 600.000</span>
+</div>
+</div>
+<button aria-label="Edit Kategori Transportasi" class="w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-baseline">
+<span class="font-mono-currency-md text-mono-currency-md text-on-surface font-semibold">Rp 420.000</span>
+<span class="font-label-caps text-label-caps text-primary font-bold">70% (Aman)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" style="width: 70%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sisa plafon: Rp 180.000</span>
+</div>
+</div>
+<!-- Category Card 3: Utilities & Bills (81% Waspada) -->
+<div class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-unit-3">
+<div class="w-11 h-11 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[24px]">receipt</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Tagihan &amp; Utilitas</h3>
+<span class="px-1.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-caps text-label-caps font-bold">Waspada</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Limit Rp 800.000</span>
+</div>
+</div>
+<button aria-label="Edit Kategori Tagihan" class="w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-baseline">
+<span class="font-mono-currency-md text-mono-currency-md text-tertiary font-semibold">Rp 650.000</span>
+<span class="font-label-caps text-label-caps text-tertiary font-bold">81% (Ambang batas)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full transition-all duration-300" style="width: 81%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sisa plafon ketat: Rp 150.000</span>
+</div>
+</div>
+<!-- Category Card 4: Shopping & Entertainment (26% Safe) -->
+<div class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-unit-3">
+<div class="w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Belanja &amp; Hiburan</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Limit Rp 1.000.000</span>
+</div>
+</div>
+<button aria-label="Edit Kategori Belanja" class="w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-baseline">
+<span class="font-mono-currency-md text-mono-currency-md text-on-surface font-semibold">Rp 260.000</span>
+<span class="font-label-caps text-label-caps text-primary font-bold">26% (Sangat Luang)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" style="width: 26%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sisa plafon: Rp 740.000</span>
+</div>
+</div>
+</section>
+<!-- Bottom Action & Architecture Compliance Card -->
+<section class="flex flex-col space-y-unit-3 pt-2">
+<!-- Save Commit Button -->
+<button class="w-full h-12 min-h-[48px] rounded-xl bg-primary text-on-primary font-headline-sm text-headline-sm shadow-md hover:bg-surface-tint active:scale-[0.98] transition-all flex items-center justify-center gap-2" id="btn-save-budget" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Simpan Perubahan Anggaran</span>
+</button>
+<!-- IndexedDB & Firestore Sync Status Pill -->
+<div class="flex items-center justify-center gap-2 p-unit-3 rounded-xl bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary">cloud_done</span>
+<span class="font-body-sm text-body-sm">Kalkulasi dihitung lokal di perangkat (Zero Server Cost)</span>
+</div>
+</section>
+</div>
+<script>
+  // Ensure bottom navigation 'Budget' tab is visually active per spec
+  (function setActiveNav() {
+    const navLinks = document.querySelectorAll('nav a[data-path]');
+    navLinks.forEach(link => {
+      const path = link.getAttribute('data-path');
+      if (path === 'budget') {
+        link.classList.remove('text-on-surface-variant');
+        link.classList.add('text-primary', 'font-semibold');
+        const icon = link.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.style.fontVariationSettings = "'FILL' 1";
+        }
+      } else {
+        link.classList.remove('text-primary', 'font-semibold');
+        link.classList.add('text-on-surface-variant');
+        const icon = link.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.style.fontVariationSettings = "'FILL' 0";
+        }
+      }
+    });
+  })();
+
+  // Budget Adjuster Quick Buttons
+  function adjustBudget(amount) {
+    const input = document.getElementById('total-budget-input');
+    if (!input) return;
+    let current = parseInt(input.value.replace(/\./g, ''), 10) || 0;
+    current = Math.max(500000, current + amount);
+    input.value = current.toLocaleString('id-ID');
+  }
+
+  // Warning Threshold live note update
+  function updateThresholdNote(val, idx) {
+    const totalInput = document.getElementById('total-budget-input');
+    const total = parseInt(totalInput.value.replace(/\./g, ''), 10) || 4000000;
+    const targetAmt = Math.round((total * (val / 100)));
+    const formatted = 'Rp ' + targetAmt.toLocaleString('id-ID');
+    
+    if (idx === 1) {
+      document.getElementById('threshold-val-1').innerText = val + '%';
+      document.getElementById('note-threshold-1').innerHTML = 'Notifikasi visual saat pengeluaran capai <strong>' + formatted + '</strong>';
+    } else if (idx === 2) {
+      document.getElementById('threshold-val-2').innerText = val + '%';
+      document.getElementById('note-threshold-2').innerHTML = 'Peringatan overbudget saat tembus <strong>' + formatted + '</strong>';
+    }
+  }
+
+  // Toast feedback micro-interaction on Save
+  document.getElementById('btn-save-budget')?.addEventListener('click', function() {
+    const originalText = this.innerHTML;
+    this.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">sync</span><span>Tersimpan di IndexedDB</span>';
+    this.classList.remove('bg-primary');
+    this.classList.add('bg-primary-container', 'text-on-primary-container');
+    setTimeout(() => {
+      this.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Anggaran Aktif Diperbarui</span>';
+      setTimeout(() => {
+        this.innerHTML = originalText;
+        this.classList.add('bg-primary');
+        this.classList.remove('bg-primary-container', 'text-on-primary-container');
+      }, 1500);
+    }, 600);
+  });
+</script></main><nav class="fixed bottom-0 max-w-[480px] w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.04)]" data-active-classes="text-primary"><div class="flex justify-around items-center h-16 px-unit-2 relative"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 transition-colors text-primary" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">dashboard</span><span class="font-label-caps text-label-caps mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="transaksi" href="#"><span class="material-symbols-outlined text-[24px]">receipt_long</span><span class="font-label-caps text-label-caps mt-0.5">Transaksi</span></a><div class="relative -top-3 flex items-center justify-center"><a class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-container text-on-primary shadow-[0_4px_12px_rgba(16,185,129,0.35)] active:scale-95 transition-transform" data-path="quick-entry" href="#"><span class="material-symbols-outlined text-[28px]">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="budget" href="#"><span class="material-symbols-outlined text-[24px]">donut_large</span><span class="font-label-caps text-label-caps mt-0.5">Budget</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[24px]">tune</span><span class="font-label-caps text-label-caps mt-0.5">Settings</span></a></div></nav></div></body></html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f8f9ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-tint": "#006c49", "secondary": "#565e74", "primary": "#006c49", "primary-container": "#10b981", "secondary-fixed": "#dae2fd", "on-secondary-fixed": "#131b2e", "primary-fixed": "#6ffbbe", "surface-container-high": "#dce9ff", "on-tertiary-fixed-variant": "#653e00", "inverse-on-surface": "#eaf1ff", "on-surface-variant": "#3c4a42", "on-primary-fixed-variant": "#005236", "on-surface": "#0b1c30", "surface-bright": "#f8f9ff", "secondary-container": "#dae2fd", "on-error-container": "#93000a", "on-tertiary-container": "#523200", "background": "#f8f9ff", "inverse-primary": "#4edea3", "primary-fixed-dim": "#4edea3", "on-secondary-container": "#5c647a", "tertiary-fixed-dim": "#ffb95f", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "on-primary-fixed": "#002113", "outline": "#6c7a71", "secondary-fixed-dim": "#bec6e0", "error": "#ba1a1a", "on-primary-container": "#00422b", "surface-container-highest": "#d3e4fe", "on-background": "#0b1c30", "tertiary": "#855300", "surface": "#f8f9ff", "on-error": "#ffffff", "surface-container-low": "#eff4ff", "surface-container": "#e5eeff", "outline-variant": "#bbcabf", "tertiary-fixed": "#ffddb8", "tertiary-container": "#e29100", "surface-variant": "#d3e4fe", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "inverse-surface": "#213145", "on-secondary-fixed-variant": "#3f465c", "surface-dim": "#cbdbf5", "on-primary": "#ffffff", "on-tertiary-fixed": "#2a1700" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "unit-5": "1.25rem", "desktop-max-w": "480px", "unit-8": "2rem", "unit-4": "1rem", "unit-1": "0.25rem", "unit-2": "0.5rem", "mobile-gutter": "0.75rem", "mobile-margin": "1rem", "unit-6": "1.5rem", "unit-3": "0.75rem", "unit-10": "2.5rem", "unit-12": "3rem" }, "fontFamily": { "mono-currency-md": ["JetBrains Mono"], "mono-currency-lg": ["JetBrains Mono"], "display-hero-mobile": ["Inter"], "headline-lg": ["Inter"], "display-hero": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"], "body-sm": ["Inter"], "label-caps": ["Inter"], "headline-sm": ["Inter"] }, "fontSize": { "mono-currency-md": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "mono-currency-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface text-on-surface flex flex-col items-center min-h-screen"><div class="w-full max-w-[480px] relative flex flex-col min-h-screen bg-surface"><header class="fixed top-0 max-w-[480px] w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-mobile-margin flex items-center justify-between gap-unit-2"><div class="flex items-center gap-unit-2 min-w-0"><img alt="Expense Tracker PWA Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VnYWc3VLn8b4pZnqWplj3VvcvlL5QNNVrDGbm48WyFTePFVPJA_OPDLLiaMcohKfsnK4SXGxgKyPQOZEsbN08jfBSxGbfcJDtFAxZLBfy2WgYsTeUMqO5fGfLmCQWhkecoEBDOLdTupIhK4ezJQH0boVhqcSfpGX_MAui98Yir4ngcjcM8YFKJKrpf6qPF6GSYpm0M9aoekIHi5sJbQAcsYhHCnujHwdZ8Yy_TJYcdWiJH-XM4ovVa1A"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate leading-tight">FinFlow PWA</span><div class="flex items-center gap-1 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant truncate uppercase">Firestore Synced</span></div></div></div><div class="flex items-center gap-unit-2 shrink-0"><span class="font-headline-sm text-headline-sm text-on-surface-variant hidden">Dashboard</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full px-mobile-margin pt-16 pb-28 bg-surface"><div class="flex flex-col w-full select-none" id="quick-entry-container">
+<!-- Interactive Modal / Entry Canvas Header -->
+<div class="flex items-center justify-between py-unit-2">
+<div class="flex items-center gap-unit-2">
+<button aria-label="Tutup" class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active:scale-90 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Catat Pengeluaran</h1>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Offline Ready • IndexedDB</span>
+</div>
+</div>
+</div>
+<!-- Date selector badge -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-body-sm text-body-sm active:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span>
+<span class="font-medium">Hari ini</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+<!-- Hero Numerical Display Card -->
+<div class="mt-unit-3 p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col items-center justify-center relative overflow-hidden">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-1">Nominal Transaksi</span>
+<div class="flex items-baseline justify-center gap-1.5 my-unit-2 w-full">
+<span class="font-headline-md text-headline-md text-on-surface-variant font-semibold">Rp</span>
+<div class="font-mono-currency-lg text-[34px] leading-tight font-bold text-on-surface tracking-tight transition-all" id="amount-display">
+        45.000
+      </div>
+<span class="w-0.5 h-7 bg-primary-container animate-pulse rounded-full" id="blinking-cursor"></span>
+</div>
+<!-- Quick Increment Pills -->
+<div class="flex items-center justify-center gap-unit-2 mt-unit-1 w-full overflow-x-auto py-1">
+<button class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm font-medium active:scale-95 transition-all active:bg-secondary-container" data-add="10000" type="button">
+        +10rb
+      </button>
+<button class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm font-medium active:scale-95 transition-all active:bg-secondary-container" data-add="20000" type="button">
+        +20rb
+      </button>
+<button class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm font-medium active:scale-95 transition-all active:bg-secondary-container" data-add="50000" type="button">
+        +50rb
+      </button>
+<button class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface font-body-sm text-body-sm font-medium active:scale-95 transition-all active:bg-secondary-container" data-add="100000" type="button">
+        +100rb
+      </button>
+</div>
+</div>
+<!-- Category Grid Selection -->
+<div class="mt-unit-4">
+<div class="flex items-center justify-between mb-unit-2">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Kategori Pos Anggaran</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">Batas: Rp 1.2jt/bln</span>
+</div>
+<div class="grid grid-cols-3 gap-unit-2" id="category-picker">
+<!-- Makanan (Default Active) -->
+<button class="cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-primary text-on-primary shadow-sm transition-all text-left" data-cat="makanan" type="button">
+<div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline-sm text-[13px] leading-tight font-semibold truncate">Makan</p>
+<p class="font-body-sm text-[10px] text-white/80 truncate">Kuliner &amp; Cafe</p>
+</div>
+</button>
+<!-- Transportasi -->
+<button class="cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-surface-container-lowest text-on-surface transition-all text-left active:scale-98" data-cat="transport" type="button">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[18px]">commute</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline-sm text-[13px] leading-tight font-semibold truncate">Transport</p>
+<p class="font-body-sm text-[10px] text-on-surface-variant truncate">Bensin, Ojol</p>
+</div>
+</button>
+<!-- Belanja -->
+<button class="cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-surface-container-lowest text-on-surface transition-all text-left active:scale-98" data-cat="belanja" type="button">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline-sm text-[13px] leading-tight font-semibold truncate">Belanja</p>
+<p class="font-body-sm text-[10px] text-on-surface-variant truncate">Supermarket</p>
+</div>
+</button>
+<!-- Tagihan -->
+<button class="cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-surface-container-lowest text-on-surface transition-all text-left active:scale-98" data-cat="tagihan" type="button">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline-sm text-[13px] leading-tight font-semibold truncate">Tagihan</p>
+<p class="font-body-sm text-[10px] text-on-surface-variant truncate">Listrik &amp; Wifi</p>
+</div>
+</button>
+<!-- Hiburan -->
+<button class="cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-surface-container-lowest text-on-surface transition-all text-left active:scale-98" data-cat="hiburan" type="button">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[18px]">sports_esports</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline-sm text-[13px] leading-tight font-semibold truncate">Hiburan</p>
+<p class="font-body-sm text-[10px] text-on-surface-variant truncate">Film &amp; Hobi</p>
+</div>
+</button>
+<!-- Kesehatan -->
+<button class="cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-surface-container-lowest text-on-surface transition-all text-left active:scale-98" data-cat="kesehatan" type="button">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[18px]">medical_services</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline-sm text-[13px] leading-tight font-semibold truncate">Kesehatan</p>
+<p class="font-body-sm text-[10px] text-on-surface-variant truncate">Apotek, Obat</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Quick Note & Source Selector -->
+<div class="mt-unit-3 flex flex-col gap-unit-2">
+<div class="flex items-center gap-unit-2">
+<!-- Input Notes with inline clear -->
+<div class="flex-1 flex items-center gap-2 px-3.5 h-12 rounded-xl bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">edit_note</span>
+<input class="w-full bg-transparent text-on-surface font-body-sm text-body-sm outline-none placeholder:text-outline-variant" id="note-input" placeholder="Catatan (Kopi susu, parkir...)" type="text" value="Makan Siang Soto Betawi"/>
+</div>
+<!-- Payment Source Dropdown Pill -->
+<button class="h-12 px-3 rounded-xl bg-surface-container-lowest shadow-sm flex items-center gap-2 text-on-surface active:bg-surface-container transition-colors shrink-0" type="button">
+<div class="w-6 h-6 rounded-md bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase">Sumber</span>
+<span class="font-body-sm text-[12px] font-semibold text-on-surface">QRIS / BCA</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">unfold_more</span>
+</button>
+</div>
+</div>
+<!-- Integrated Ergonomic Keypad (Bottom Thumb Region) -->
+<div class="mt-unit-4 p-2 rounded-2xl bg-surface-container-lowest shadow-sm">
+<div class="grid grid-cols-3 gap-1.5" id="keypad">
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="1" type="button">1</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="2" type="button">2</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="3" type="button">3</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="4" type="button">4</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="5" type="button">5</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="6" type="button">6</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="7" type="button">7</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="8" type="button">8</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="9" type="button">9</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface-variant flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="00" type="button">00</button>
+<button class="key-btn h-12 rounded-xl bg-surface font-headline-md text-headline-md font-semibold text-on-surface flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="0" type="button">0</button>
+<button aria-label="Hapus Digit" class="key-btn h-12 rounded-xl bg-surface text-error flex items-center justify-center active:bg-surface-container-high active:scale-95 transition-all" data-val="backspace" type="button">
+<span class="material-symbols-outlined text-[24px]">backspace</span>
+</button>
+</div>
+</div>
+<!-- Primary Instant Action Button -->
+<div class="mt-unit-4 flex flex-col items-center">
+<button class="w-full h-14 rounded-xl bg-primary text-on-primary flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-[0.98] transition-all" id="save-transaction-btn" type="button">
+<span class="material-symbols-outlined text-[24px]">check_circle</span>
+<span class="font-headline-sm text-headline-sm font-semibold tracking-tight" id="cta-label">Simpan Transaksi (Rp 45.000)</span>
+</button>
+<div class="flex items-center gap-1 mt-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">cloud_done</span>
+<span class="font-label-caps text-[11px]">Tersimpan instan ke IndexedDB &amp; Firestore</span>
+</div>
+</div>
+<!-- Success Toast Overlay (Micro-interaction) -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-full flex items-center gap-2 shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50" id="save-toast">
+<span class="material-symbols-outlined text-[20px] text-primary-fixed">task_alt</span>
+<span class="font-body-sm text-body-sm font-medium">Tersimpan secara lokal &amp; disinkronkan!</span>
+</div>
+</div>
+<script>
+  (function() {
+    let currentRawAmount = 45000;
+    const amountDisplay = document.getElementById('amount-display');
+    const ctaLabel = document.getElementById('cta-label');
+    const toast = document.getElementById('save-toast');
+
+    function formatNumberID(num) {
+      return new Intl.NumberFormat('id-ID').format(num);
+    }
+
+    function updateView() {
+      const formatted = formatNumberID(currentRawAmount);
+      amountDisplay.textContent = formatted;
+      ctaLabel.textContent = `Simpan Transaksi (Rp ${formatted})`;
+    }
+
+    // Keypad interactions
+    const keypad = document.getElementById('keypad');
+    keypad.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const val = btn.getAttribute('data-val');
+      
+      if (val === 'backspace') {
+        const str = currentRawAmount.toString();
+        if (str.length <= 1) {
+          currentRawAmount = 0;
+        } else {
+          currentRawAmount = parseInt(str.slice(0, -1), 10) || 0;
+        }
+      } else if (val === '00') {
+        if (currentRawAmount > 0 && currentRawAmount < 10000000) {
+          currentRawAmount = currentRawAmount * 100;
+        }
+      } else {
+        const digit = parseInt(val, 10);
+        if (currentRawAmount === 0) {
+          currentRawAmount = digit;
+        } else {
+          const newStr = currentRawAmount.toString() + digit.toString();
+          if (newStr.length <= 10) {
+            currentRawAmount = parseInt(newStr, 10);
+          }
+        }
+      }
+      updateView();
+    });
+
+    // Quick add pills
+    document.querySelectorAll('.quick-add-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const addVal = parseInt(btn.getAttribute('data-add'), 10);
+        currentRawAmount += addVal;
+        updateView();
+      });
+    });
+
+    // Category Selector
+    const catContainer = document.getElementById('category-picker');
+    catContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-pill');
+      if (!btn) return;
+      
+      // Reset all buttons
+      document.querySelectorAll('.cat-pill').forEach(pill => {
+        pill.className = 'cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-surface-container-lowest text-on-surface transition-all text-left active:scale-98';
+        const iconWrap = pill.querySelector('div:first-child');
+        if (iconWrap) iconWrap.className = 'w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary';
+        const sub = pill.querySelector('p:last-child');
+        if (sub) sub.className = 'font-body-sm text-[10px] text-on-surface-variant truncate';
+      });
+
+      // Active selected state
+      btn.className = 'cat-pill flex items-center gap-2 p-2.5 rounded-xl bg-primary text-on-primary shadow-sm transition-all text-left';
+      const activeIconWrap = btn.querySelector('div:first-child');
+      if (activeIconWrap) activeIconWrap.className = 'w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0 text-white';
+      const activeSub = btn.querySelector('p:last-child');
+      if (activeSub) activeSub.className = 'font-body-sm text-[10px] text-white/80 truncate';
+    });
+
+    // Save Micro-interaction
+    const saveBtn = document.getElementById('save-transaction-btn');
+    saveBtn.addEventListener('click', () => {
+      saveBtn.classList.add('scale-95');
+      setTimeout(() => saveBtn.classList.remove('scale-95'), 150);
+
+      // Trigger Toast
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100', '-translate-y-2');
+      
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', '-translate-y-2');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2200);
+    });
+  })();
+</script></main><nav class="fixed bottom-0 max-w-[480px] w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.04)]" data-active-classes="text-primary"><div class="flex justify-around items-center h-16 px-unit-2 relative"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 transition-colors text-primary" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">dashboard</span><span class="font-label-caps text-label-caps mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="transaksi" href="#"><span class="material-symbols-outlined text-[24px]">receipt_long</span><span class="font-label-caps text-label-caps mt-0.5">Transaksi</span></a><div class="relative -top-3 flex items-center justify-center"><a class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-container text-on-primary shadow-[0_4px_12px_rgba(16,185,129,0.35)] active:scale-95 transition-transform" data-path="quick-entry" href="#"><span class="material-symbols-outlined text-[28px]">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="budget" href="#"><span class="material-symbols-outlined text-[24px]">donut_large</span><span class="font-label-caps text-label-caps mt-0.5">Budget</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[24px]">tune</span><span class="font-label-caps text-label-caps mt-0.5">Settings</span></a></div></nav></div></body></html>

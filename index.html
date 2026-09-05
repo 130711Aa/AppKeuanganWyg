@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>FinFlow - Expense Tracker PWA</title>
+
+  <!-- PWA Manifest & Meta -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#006c49" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg" />
+  <script>
+    (function () {
+      try {
+        const theme = localStorage.getItem('finflow_theme_v1') || 'system';
+        const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) { }
+    })();
+  </script>
+
+  <!-- Google Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN with Custom Theme Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-tint": "#006c49",
+            "secondary": "#565e74",
+            "primary": "#006c49",
+            "primary-container": "#10b981",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#00422b",
+            "secondary-fixed": "#dae2fd",
+            "on-secondary-fixed": "#131b2e",
+            "on-secondary": "#ffffff",
+            "primary-fixed": "#6ffbbe",
+            "primary-fixed-dim": "#4edea3",
+            "on-primary-fixed": "#002113",
+            "on-primary-fixed-variant": "#005236",
+            "surface-container-high": "#dce9ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-low": "#eff4ff",
+            "surface-container": "#e5eeff",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#3c4a42",
+            "on-surface": "#0b1c30",
+            "surface-bright": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "surface": "#f8f9ff",
+            "background": "#f8f9ff",
+            "on-background": "#0b1c30",
+            "secondary-container": "#dae2fd",
+            "on-secondary-container": "#5c647a",
+            "tertiary": "#855300",
+            "tertiary-container": "#d97706",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#ffffff",
+            "tertiary-fixed": "#ffddb8",
+            "tertiary-fixed-dim": "#ffb95f",
+            "on-tertiary-fixed": "#2a1700",
+            "on-tertiary-fixed-variant": "#653e00",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            "outline": "#6c7a71",
+            "outline-variant": "#bbcabf",
+            "inverse-surface": "#213145",
+            "inverse-on-surface": "#eaf1ff"
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "sm": "0.25rem",
+            "md": "0.75rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "2xl": "1.25rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "unit-1": "0.25rem",
+            "unit-2": "0.5rem",
+            "unit-3": "0.75rem",
+            "unit-4": "1rem",
+            "unit-5": "1.25rem",
+            "unit-6": "1.5rem",
+            "unit-8": "2rem",
+            "unit-10": "2.5rem",
+            "unit-12": "3rem",
+            "mobile-margin": "1rem",
+            "mobile-gutter": "0.75rem",
+            "desktop-max-w": "480px"
+          },
+          fontFamily: {
+            "sans": ["Inter", "-apple-system", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "label-caps": ["Inter", "sans-serif"],
+            "mono-currency-md": ["Inter", "sans-serif"],
+            "mono-currency-lg": ["Inter", "sans-serif"]
+          },
+          fontSize: {
+            "headline-sm": ["14px", { lineHeight: "20px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "headline-md": ["17px", { lineHeight: "24px", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+            "body-md": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+            "label-caps": ["11px", { lineHeight: "15px", letterSpacing: "0.03em", fontWeight: "600" }],
+            "mono-currency-md": ["13.5px", { lineHeight: "18px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "mono-currency-lg": ["20px", { lineHeight: "26px", letterSpacing: "-0.02em", fontWeight: "700" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom App Stylesheet -->
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+
+<body class="bg-[#f0f4fc] dark:bg-[#080d14] text-on-surface flex flex-col items-center min-h-screen">
+
+  <!-- Mobile Viewport Shell (Max Width 480px Centered) -->
+  <div class="w-full max-w-[480px] relative flex flex-col min-h-screen bg-surface shadow-2xl overflow-x-hidden">
+
+    <!-- Top Sticky Header -->
+    <header
+      class="fixed top-0 max-w-[480px] w-full z-40 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe border-b border-slate-200/30 dark:border-slate-800">
+      <div class="h-16 px-mobile-margin flex items-center justify-between gap-unit-2">
+        <!-- Logo & Branding -->
+        <div class="flex items-center gap-2.5 min-w-0 cursor-pointer" onclick="UI.switchView('dashboard')">
+          <div
+            class="w-10 h-10 rounded-full bg-[#006c49] flex items-center justify-center text-white shadow-xs shrink-0">
+            <span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-[17px] text-on-surface truncate leading-tight">FinFlow PWA</span>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span id="header-sync-dot" class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+              <span id="header-sync-status"
+                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider truncate">Penyimpanan
+                Lokal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Actions -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button aria-label="Pengaturan"
+            class="w-10 h-10 rounded-full bg-[#e8f1fc] dark:bg-slate-800 text-[#475569] dark:text-slate-300 flex items-center justify-center active-press hover:bg-[#dbe7f9] dark:hover:bg-slate-700 transition-colors border border-slate-200/50 dark:border-slate-700"
+            onclick="UI.switchView('settings')">
+            <span class="material-symbols-outlined text-[20px]">settings</span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-[#006c49] flex items-center justify-center text-white cursor-pointer active-press shadow-xs ring-2 ring-transparent hover:ring-primary/20"
+            onclick="UI.switchView('settings')">
+            <span class="material-symbols-outlined text-[19px]">person</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Content Container -->
+    <main class="flex-1 flex flex-col relative w-full px-mobile-margin pt-20 pb-28 bg-surface">
+
+      <!-- ==========================================
+           VIEW 1: DASHBOARD & BUDGET PROGRESS
+           ========================================== -->
+      <section id="view-dashboard" class="flex flex-col w-full gap-unit-4">
+
+        <!-- Period Switcher & Synced Status Top Bar -->
+        <div class="flex items-center justify-between gap-unit-2">
+          <!-- Period Picker Capsule (Clean Pill Toggle) -->
+          <div id="dash-period-capsule" class="inline-flex items-center pill-track">
+            <!-- Rendered by JS -->
+          </div>
+          <!-- Status Pill -->
+          <div id="dash-status-pill"
+            class="inline-flex items-center justify-center px-3.5 py-1.5 rounded-full text-[11px] font-bold tracking-wide shrink-0">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Main Hero Budget Card -->
+        <div
+          class="relative overflow-hidden bg-surface-container-lowest rounded-2xl p-unit-5 shadow-sm border border-slate-100">
+          <!-- Ambient Glow Effect -->
+          <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-primary-fixed/25 pointer-events-none blur-2xl">
+          </div>
+
+          <div class="flex items-start justify-between relative z-10">
+            <div>
+              <span class="text-[11px] uppercase font-bold tracking-wider text-on-surface-variant">Sisa Anggaran Periode
+                Ini</span>
+              <div class="flex items-baseline gap-1.5 mt-1">
+                <span class="text-[18px] font-bold text-on-surface-variant">Rp</span>
+                <span id="dash-remaining-amount"
+                  class="text-[30px] font-bold text-on-surface tracking-tight leading-tight tabular-nums">0</span>
+              </div>
+            </div>
+            <div
+              class="p-2.5 rounded-xl bg-surface-container-low text-primary flex items-center justify-center shadow-xs">
+              <span class="material-symbols-outlined text-[24px]">wallet</span>
+            </div>
+          </div>
+
+          <!-- Progress Meter with 80% Warning Checkpoint -->
+          <div class="mt-4 relative z-10">
+            <div class="flex justify-between items-center mb-1.5">
+              <span id="dash-spent-amount" class="text-[12px] text-on-surface-variant font-medium">Terpakai Rp 0</span>
+              <span id="dash-total-amount" class="text-[12px] font-bold text-on-surface">Total Rp 0</span>
+            </div>
+
+            <!-- Track bar -->
+            <div class="relative h-3 w-full bg-surface-container rounded-full overflow-hidden">
+              <!-- Warning checkpoint line at 80% -->
+              <div id="dash-checkpoint-pin"
+                class="absolute top-0 bottom-0 left-[80%] w-0.5 bg-tertiary-container/80 z-20 shadow-xs"
+                title="Ambang Waspada 80%"></div>
+              <!-- Progress Fill Bar -->
+              <div id="dash-progress-fill"
+                class="h-full bg-primary-container rounded-full transition-all duration-700 ease-out"
+                style="width: 0%;"></div>
+            </div>
+
+            <div
+              class="flex justify-between items-center mt-1 text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">
+              <span>0%</span>
+              <span class="text-tertiary">Ambang Waspada 80%</span>
+              <span>100%</span>
+            </div>
+          </div>
+
+          <!-- Safe to Spend Daily Callout -->
+          <div
+            class="mt-unit-4 pt-3 flex items-center justify-between bg-surface-container-low dark:bg-slate-900/80 rounded-xl px-unit-3 py-2.5 relative z-10 border border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2.5">
+              <div
+                class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[18px]">event_repeat</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider leading-none">Aman
+                  Dibelanjakan / Hari</p>
+                <p id="dash-daily-spend" class="text-[14px] font-bold text-primary dark:text-emerald-400 mt-0.5 tabular-nums">Rp 0 <span
+                    class="text-[11px] font-normal text-slate-500 dark:text-slate-400">/ hari</span></p>
+              </div>
+            </div>
+            <span id="dash-days-left"
+              class="text-[12px] text-slate-700 dark:text-slate-200 font-semibold bg-white/90 dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-200/60 dark:border-slate-700/60 shadow-2xs">0 hari sisa</span>
+          </div>
+        </div>
+
+        <!-- Period Cashflow Summary Widget -->
+        <div class="grid grid-cols-3 gap-2 p-unit-3 rounded-2xl bg-surface-container-lowest dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-800">
+          <div class="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-container-low dark:bg-slate-900/80 border border-slate-100/50 dark:border-slate-800/60">
+            <span class="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Pemasukan</span>
+            <span id="dash-cashflow-income" class="text-[13px] font-bold text-emerald-600 dark:text-emerald-400 mt-0.5 tabular-nums">+Rp 0</span>
+          </div>
+          <div class="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-container-low dark:bg-slate-900/80 border border-slate-100/50 dark:border-slate-800/60">
+            <span class="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Pengeluaran</span>
+            <span id="dash-cashflow-expense" class="text-[13px] font-bold text-slate-800 dark:text-slate-100 mt-0.5 tabular-nums">-Rp 0</span>
+          </div>
+          <div class="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-container-low dark:bg-slate-900/80 border border-slate-100/50 dark:border-slate-800/60">
+            <span class="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Arus Kas (Net)</span>
+            <span id="dash-cashflow-net" class="text-[13px] font-bold text-primary dark:text-emerald-400 mt-0.5 tabular-nums">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Quick Action Row -->
+        <div class="flex items-center gap-unit-2">
+          <button
+            class="flex-1 min-h-[48px] h-12 bg-primary text-white rounded-xl font-semibold text-[15px] flex items-center justify-center gap-2 shadow-sm active-press transition-transform"
+            onclick="UI.switchView('quick-entry')">
+            <span class="material-symbols-outlined text-[22px]">edit_note</span>
+            <span>+ Catat Pengeluaran</span>
+          </button>
+          <button aria-label="Lihat Riwayat"
+            class="min-w-[48px] min-h-[48px] w-12 h-12 bg-surface-container-lowest text-on-surface rounded-xl flex items-center justify-center shadow-sm active-press transition-transform border border-slate-100"
+            onclick="UI.switchView('transaksi')">
+            <span class="material-symbols-outlined text-[22px] text-on-surface-variant">receipt_long</span>
+          </button>
+          <button aria-label="Atur Anggaran"
+            class="min-w-[48px] min-h-[48px] w-12 h-12 bg-surface-container-lowest text-on-surface rounded-xl flex items-center justify-center shadow-sm active-press transition-transform border border-slate-100"
+            onclick="UI.switchView('budget')">
+            <span class="material-symbols-outlined text-[22px] text-on-surface-variant">tune</span>
+          </button>
+        </div>
+
+        <!-- Plafon Kategori Section -->
+        <div class="flex flex-col gap-unit-2">
+          <div class="flex items-center justify-between px-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-bold text-[16px] text-on-surface">Plafon Kategori</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            </div>
+            <button class="text-[12px] text-primary font-semibold hover:underline"
+              onclick="UI.switchView('budget')">Atur Kuota</button>
+          </div>
+
+          <!-- Category Progress List -->
+          <div id="dash-category-list" class="grid grid-cols-1 gap-unit-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Recent Transactions Feed in Dashboard -->
+        <div class="flex flex-col gap-unit-2 mt-1">
+          <div class="flex items-center justify-between px-1">
+            <span class="font-bold text-[16px] text-on-surface">Transaksi Terkini</span>
+            <button class="text-[12px] text-primary font-semibold hover:underline"
+              onclick="UI.switchView('transaksi')">Lihat Semua</button>
+          </div>
+
+          <div id="dash-recent-transactions" class="flex flex-col gap-unit-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ==========================================
+           VIEW 2: TRANSAKSI (RIWAYAT & FILTER)
+           ========================================== -->
+      <section id="view-transaksi" class="hidden flex-col w-full">
+
+        <!-- Search and Filter Header -->
+        <div class="flex flex-col gap-unit-3 mb-unit-4">
+          <!-- Search Bar -->
+          <div class="relative flex items-center w-full">
+            <span
+              class="material-symbols-outlined absolute left-unit-4 text-outline text-[20px] pointer-events-none">search</span>
+            <input id="transactionSearch"
+              class="w-full h-12 pl-11 pr-11 bg-surface-container-lowest text-on-surface rounded-xl shadow-[0_1px_3px_0_rgba(15,23,42,0.04)] placeholder:text-outline text-[14px] focus:outline-none border border-slate-100"
+              placeholder="Cari catatan, kategori, nominal..." type="text" />
+            <button id="clearSearchBtn" aria-label="Bersihkan pencarian"
+              class="absolute right-unit-2 w-9 h-9 flex items-center justify-center rounded-lg text-outline active-press">
+              <span class="material-symbols-outlined text-[18px]">close</span>
+            </button>
+          </div>
+
+          <!-- Period Segmented Picker & Date Pill -->
+          <div class="flex items-center justify-between gap-unit-2">
+            <!-- Period Selector Toggle (Clean Pill Design) -->
+            <div class="inline-flex pill-track gap-0.5">
+              <button class="period-tab px-4 py-1.5 rounded-full text-[13px] pill-btn-inactive transition-all"
+                data-period="minggu" type="button">Minggu Ini</button>
+              <button class="period-tab px-4 py-1.5 rounded-full text-[13px] pill-btn-active transition-all"
+                data-period="bulan" type="button">Bulan Ini</button>
+              <button class="period-tab px-4 py-1.5 rounded-full text-[13px] pill-btn-inactive transition-all"
+                data-period="kustom" type="button">Kustom</button>
+            </div>
+            <!-- Active Period Badge -->
+            <button
+              class="flex items-center gap-1 px-unit-3 py-2 bg-surface-container-lowest rounded-xl shadow-sm text-on-surface active-press border border-slate-100"
+              onclick="UI.openCustomDateModal()" type="button">
+              <span class="material-symbols-outlined text-primary text-[18px]">calendar_month</span>
+              <span id="history-active-period-label" class="text-[11px] font-bold text-on-surface">Minggu Ini</span>
+              <span class="material-symbols-outlined text-outline text-[16px]">expand_more</span>
+            </button>
+          </div>
+
+          <!-- Type Filter Tabs: Semua | Pengeluaran | Pemasukan -->
+          <div class="flex items-center gap-1.5 px-0.5">
+            <button class="history-type-btn px-3 py-1 rounded-full text-[12px] font-bold pill-btn-active transition-all cursor-pointer" data-type="all" type="button">Semua</button>
+            <button class="history-type-btn px-3 py-1 rounded-full text-[12px] font-bold pill-btn-inactive transition-all cursor-pointer" data-type="expense" type="button">Pengeluaran</button>
+            <button class="history-type-btn px-3 py-1 rounded-full text-[12px] font-bold pill-btn-inactive transition-all cursor-pointer" data-type="income" type="button">Pemasukan</button>
+          </div>
+
+          <!-- Category Filter Chips (Horizontal Scrollable) -->
+          <div id="history-category-chips"
+            class="flex items-center gap-unit-2 overflow-x-auto py-1 -mx-mobile-margin px-mobile-margin no-scrollbar">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Summary Metric Banner of Filtered View -->
+        <div
+          class="relative overflow-hidden bg-surface-container-lowest rounded-2xl p-unit-4 mb-unit-5 shadow-sm flex items-center justify-between border border-slate-100">
+          <div class="flex flex-col min-w-0 pr-unit-2">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Total Pengeluaran
+                Filter</span>
+              <span id="history-summary-count"
+                class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold">0
+                Transaksi</span>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span id="history-summary-total"
+                class="text-[20px] font-bold text-on-surface tracking-tight tabular-nums">Rp 0</span>
+            </div>
+            <span id="history-summary-avg" class="text-[11px] text-on-surface-variant mt-0.5 truncate">Rata-rata Rp 0 /
+              hari</span>
+          </div>
+          <!-- CSV Export Button -->
+          <button id="exportCsvBtn" aria-label="Unduh Rekap CSV"
+            class="flex flex-col items-center justify-center shrink-0 w-12 h-12 rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container active-press transition-all border border-slate-100"
+            title="Export Riwayat (.CSV)" type="button">
+            <span class="material-symbols-outlined text-[22px] text-primary">download</span>
+            <span class="text-[10px] font-bold text-on-surface-variant leading-none mt-0.5">CSV</span>
+          </button>
+        </div>
+
+        <!-- Grouped Daily Timeline Feed -->
+        <div id="history-feed" class="flex flex-col gap-unit-5">
+          <!-- Rendered by JS -->
+        </div>
+
+      </section>
+
+
+      <!-- ==========================================
+           VIEW 3: QUICK ENTRY (KEYPAD ERGONOMIS)
+           ========================================== -->
+      <section id="view-quick-entry" class="hidden flex-col w-full select-none">
+
+        <!-- Header & Date selector -->
+        <div class="flex items-center justify-between py-unit-1">
+          <div class="flex items-center gap-unit-2">
+            <button aria-label="Tutup"
+              class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active-press"
+              onclick="UI.switchView('dashboard')" type="button">
+              <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+            <div class="flex flex-col">
+              <h1 id="quick-entry-header-title" class="font-bold text-[18px] text-on-surface leading-tight">Catat Pengeluaran</h1>
+              <div class="flex items-center gap-1.5">
+                <span id="quick-entry-header-dot" class="w-2 h-2 rounded-full bg-primary-container"></span>
+                <span class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Offline Ready •
+                  Instant Save</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date Selector Badge -->
+          <div class="relative">
+            <button id="btn-entry-date"
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-[12px] font-semibold active-press"
+              type="button">
+              <span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span>
+              <span id="entry-date-label">Hari ini</span>
+              <span class="material-symbols-outlined text-[14px]">expand_more</span>
+            </button>
+            <input id="entry-date-picker-input" type="date"
+              class="absolute inset-0 opacity-0 cursor-pointer pointer-events-none" />
+          </div>
+        </div>
+
+        <!-- Segmented Transaction Type Pill (Pengeluaran vs Pemasukan) -->
+        <div class="mt-unit-2 flex items-center justify-center">
+          <div class="inline-flex pill-track p-1 rounded-full bg-surface-container-low border border-slate-100 dark:border-slate-800 w-full max-w-[320px]">
+            <button id="btn-tx-type-expense" type="button" class="flex-1 py-1.5 rounded-full text-[13px] font-bold transition-all pill-btn-active flex items-center justify-center gap-1.5 cursor-pointer" data-tx-type="expense">
+              <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+              <span>Pengeluaran</span>
+            </button>
+            <button id="btn-tx-type-income" type="button" class="flex-1 py-1.5 rounded-full text-[13px] font-bold transition-all pill-btn-inactive flex items-center justify-center gap-1.5 cursor-pointer" data-tx-type="income">
+              <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+              <span>Pemasukan</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Numerical Display Card -->
+        <div
+          class="mt-unit-3 p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col items-center justify-center relative overflow-hidden border border-slate-100">
+          <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Nominal
+            Transaksi</span>
+          <div class="flex items-baseline justify-center gap-1.5 my-unit-1 w-full">
+            <span class="text-[20px] font-bold text-on-surface-variant">Rp</span>
+            <div id="amount-display"
+              class="text-[34px] leading-tight font-bold text-on-surface tracking-tight transition-all tabular-nums">
+              45.000
+            </div>
+            <span id="blinking-cursor" class="w-0.5 h-8 bg-primary-container animate-pulse rounded-full"></span>
+          </div>
+
+          <!-- Quick Increment Pills -->
+          <div class="flex items-center justify-center gap-unit-2 mt-unit-2 w-full overflow-x-auto py-1">
+            <button
+              class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface text-[12px] font-semibold active-press"
+              data-add="10000" type="button">+10rb</button>
+            <button
+              class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface text-[12px] font-semibold active-press"
+              data-add="20000" type="button">+20rb</button>
+            <button
+              class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface text-[12px] font-semibold active-press"
+              data-add="50000" type="button">+50rb</button>
+            <button
+              class="quick-add-btn px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface text-[12px] font-semibold active-press"
+              data-add="100000" type="button">+100rb</button>
+          </div>
+        </div>
+
+        <!-- Category Grid Selection -->
+        <div class="mt-unit-4">
+          <div class="flex items-center justify-between mb-unit-2">
+            <span class="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider">Pilih Kategori Pos
+              Anggaran</span>
+          </div>
+          <div id="category-picker" class="grid grid-cols-3 gap-unit-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Quick Note & Payment Source Selector -->
+        <div class="mt-unit-3 flex flex-col gap-unit-2">
+          <div class="flex items-center gap-unit-2">
+            <!-- Note Input -->
+            <div
+              class="flex-1 flex items-center gap-2 px-3.5 h-12 rounded-xl bg-surface-container-lowest shadow-sm border border-slate-100">
+              <span class="material-symbols-outlined text-[20px] text-on-surface-variant">edit_note</span>
+              <input id="note-input"
+                class="w-full bg-transparent text-on-surface text-[13px] outline-none placeholder:text-outline"
+                placeholder="Catatan (Kopi, parkir, belanja...)" type="text" />
+            </div>
+
+            <!-- Payment Source Dropdown Pill -->
+            <button
+              class="h-12 px-3 rounded-xl bg-surface-container-lowest shadow-sm flex items-center gap-2 text-on-surface active-press shrink-0 border border-slate-100"
+              onclick="UI.openModal('modal-payment-source')" type="button">
+              <div
+                class="w-6 h-6 rounded-md bg-secondary-container text-on-secondary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-[15px]">account_balance_wallet</span>
+              </div>
+              <div class="flex flex-col text-left">
+                <span class="text-[9px] font-bold text-on-surface-variant uppercase leading-none">Sumber</span>
+                <span id="selected-source-label" class="text-[12px] font-semibold text-on-surface leading-tight">QRIS /
+                  JAGO</span>
+              </div>
+              <span class="material-symbols-outlined text-[16px] text-on-surface-variant">unfold_more</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Integrated Ergonomic Numeric Keypad -->
+        <div class="mt-unit-3 p-2 rounded-2xl bg-surface-container-lowest shadow-sm border border-slate-100">
+          <div id="keypad" class="grid grid-cols-3 gap-1.5">
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="1" type="button">1</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="2" type="button">2</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="3" type="button">3</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="4" type="button">4</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="5" type="button">5</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="6" type="button">6</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="7" type="button">7</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="8" type="button">8</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="9" type="button">9</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[18px] text-on-surface-variant flex items-center justify-center active-press"
+              data-val="00" type="button">00</button>
+            <button
+              class="key-btn h-12 rounded-xl bg-surface font-semibold text-[20px] text-on-surface flex items-center justify-center active-press"
+              data-val="0" type="button">0</button>
+            <button aria-label="Hapus Digit"
+              class="key-btn h-12 rounded-xl bg-surface text-error flex items-center justify-center active-press"
+              data-val="backspace" type="button">
+              <span class="material-symbols-outlined text-[24px]">backspace</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Primary Instant Action Button -->
+        <div class="mt-unit-3 flex flex-col items-center">
+          <button id="save-transaction-btn"
+            class="w-full h-14 rounded-xl bg-primary text-white flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active-press transition-all"
+            type="button">
+            <span class="material-symbols-outlined text-[24px]">check_circle</span>
+            <span id="cta-label" class="font-bold text-[16px] tracking-tight">Simpan Transaksi (Rp 45.000)</span>
+          </button>
+          <div class="flex items-center gap-1 mt-2 text-on-surface-variant">
+            <span class="material-symbols-outlined text-[14px] text-primary">cloud_done</span>
+            <span class="text-[11px] font-semibold">Tersimpan otomatis ke Penyimpanan Offline & Firestore</span>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ==========================================
+           VIEW 4: BUDGET & PERIODE MANAGEMENT
+           ========================================== -->
+      <section id="view-budget" class="hidden flex-col w-full space-y-unit-4">
+
+        <!-- Top Intro Section -->
+        <div class="flex flex-col space-y-unit-2">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[11px] font-bold text-primary tracking-wider uppercase">FinFlow Budget Controls</span>
+              <h1 class="font-bold text-[22px] text-on-surface">Kelola Anggaran</h1>
+            </div>
+            <div
+              class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm">
+              <span class="material-symbols-outlined text-[22px]">tune</span>
+            </div>
+          </div>
+          <p class="text-[12px] text-on-surface-variant leading-relaxed">
+            Atur plafon belanja dan siklus komitmen Anda. Kalkulasi *on-demand rollover* otomatis berjalan tanpa
+            komputasi server.
+          </p>
+
+          <!-- Cycle Segmented Switcher (Clean Pill Design) -->
+          <div class="grid grid-cols-3 gap-1 pill-track">
+            <button
+              class="budget-period-switch h-9 rounded-full text-on-surface font-bold text-[13px] flex items-center justify-center shadow-sm transition-all"
+              data-period-type="weekly" type="button">
+              Mingguan
+            </button>
+            <button
+              class="budget-period-switch h-9 rounded-full text-on-surface-variant font-medium text-[13px] flex items-center justify-center transition-all"
+              data-period-type="monthly" type="button">
+              Bulanan
+            </button>
+            <button
+              class="budget-period-switch h-9 rounded-full text-on-surface-variant font-medium text-[13px] flex items-center justify-center transition-all"
+              data-period-type="custom" type="button">
+              Kustom
+            </button>
+          </div>
+        </div>
+
+        <!-- Current Active Period Banner Card -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-unit-2">
+              <div class="w-9 h-9 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+                <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span id="budget-active-period-name" class="font-bold text-[15px] text-on-surface">Periode
+                    Aktif</span>
+                  <span
+                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-bold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    Aktif
+                  </span>
+                </div>
+                <span id="budget-active-period-range" class="text-[12px] text-on-surface-variant">1 Sep - 7 Sep
+                  2026</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span id="budget-active-days-left" class="text-[14px] text-primary font-bold tabular-nums">0 Hari</span>
+              <span class="block text-[10px] font-bold text-on-surface-variant uppercase">Tersisa</span>
+            </div>
+          </div>
+
+          <!-- Elapsed progress bar -->
+          <div class="w-full bg-surface-container-low rounded-full h-1.5 overflow-hidden">
+            <div id="budget-active-elapsed-bar" class="bg-primary h-full rounded-full transition-all duration-500"
+              style="width: 25%;"></div>
+          </div>
+        </div>
+
+        <!-- Total Budget Limit & Stepper Card -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-bold uppercase text-on-surface-variant">Plafon Total Anggaran</span>
+            </div>
+          </div>
+
+          <!-- Editable Amount Display -->
+          <div class="flex items-baseline gap-2 bg-surface-container-low p-unit-3 rounded-xl border border-slate-100">
+            <span class="text-[18px] font-bold text-on-surface-variant">Rp</span>
+            <input id="total-budget-input"
+              class="bg-transparent text-[22px] text-on-surface font-bold tracking-tight w-full focus:outline-none tabular-nums"
+              type="text" value="1.200.000" />
+            <span class="material-symbols-outlined text-primary text-[20px] shrink-0">check_circle</span>
+          </div>
+
+          <!-- Quick Stepper Chips -->
+          <div class="flex items-center gap-unit-2">
+            <button
+              class="budget-step-btn flex-1 h-11 rounded-xl bg-surface-container-low text-on-surface font-semibold text-[13px] active-press flex items-center justify-center gap-1 border border-slate-100"
+              data-step="-500000" type="button">
+              <span class="material-symbols-outlined text-[16px]">remove</span>
+              <span>500rb</span>
+            </button>
+            <button
+              class="budget-step-btn flex-1 h-11 rounded-xl bg-surface-container-low text-on-surface font-semibold text-[13px] active-press flex items-center justify-center gap-1 border border-slate-100"
+              data-step="500000" type="button">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>500rb</span>
+            </button>
+            <button
+              class="budget-step-btn flex-1 h-11 rounded-xl bg-primary-fixed text-on-primary-fixed font-bold text-[13px] active-press flex items-center justify-center gap-1"
+              data-step="1000000" type="button">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>1 Jt</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- On-Demand Rollover Status -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-low shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <div class="flex items-start gap-unit-3">
+            <div
+              class="w-9 h-9 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed shrink-0">
+              <span class="material-symbols-outlined text-[20px]">bolt</span>
+            </div>
+            <div class="flex flex-col flex-1 min-w-0">
+              <span class="font-bold text-[14px] text-on-surface">Client-Side Rollover Otomatis</span>
+              <p class="text-[11px] text-on-surface-variant leading-tight mt-0.5">
+                Reset otomatis saat siklus baru dimulai tanpa biaya Cloud Functions (Spark Plan Safe).
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-1">
+            <div
+              class="flex items-center justify-between min-h-[44px] px-unit-3 py-2 rounded-xl bg-surface-container-lowest border border-slate-100">
+              <span class="text-[13px] font-semibold text-on-surface">Rollover Otomatis</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input id="toggle-auto-rollover" type="checkbox" checked class="sr-only peer" />
+                <div
+                  class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container">
+                </div>
+              </label>
+            </div>
+
+            <div
+              class="flex items-center justify-between min-h-[44px] px-unit-3 py-2 rounded-xl bg-surface-container-lowest border border-slate-100">
+              <div class="flex flex-col">
+                <span class="text-[13px] font-semibold text-on-surface">Bawa Sisa Saldo Periode Lalu</span>
+                <span class="text-[11px] text-on-surface-variant">+Akumulasi surplus ke plafon baru</span>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input id="toggle-carryover" type="checkbox" checked class="sr-only peer" />
+                <div
+                  class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container">
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warning Threshold Sliders -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <div class="flex flex-col">
+            <span class="text-[10px] font-bold text-primary uppercase tracking-wider">Telemetry Thresholds</span>
+            <h2 class="font-bold text-[16px] text-on-surface">Ambang Batas Peringatan</h2>
+            <span class="text-[11px] text-on-surface-variant">Sensitivitas warna indikator saat mendekati limit</span>
+          </div>
+
+          <!-- Preview Bar -->
+          <div class="flex flex-col space-y-1">
+            <div class="h-2.5 w-full rounded-full bg-surface-container flex overflow-hidden">
+              <div class="bg-primary-container h-full" style="width: 80%;"></div>
+              <div class="bg-tertiary-container h-full" style="width: 20%;"></div>
+              <div class="bg-error h-full" style="width: 15%;"></div>
+            </div>
+            <div class="flex justify-between items-center text-[10px] font-bold uppercase">
+              <span class="text-primary">Aman (0-80%)</span>
+              <span class="text-tertiary">Waspada (80-100%)</span>
+              <span class="text-error">Over (100%+)</span>
+            </div>
+          </div>
+
+          <!-- Slider 1: Warning 80% -->
+          <div
+            class="p-unit-3 rounded-xl bg-surface-container-low flex flex-col space-y-1.5 border border-slate-100 dark:border-slate-800">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                <span class="text-[13px] font-bold text-on-surface">Peringatan Awal</span>
+              </div>
+              <span id="threshold-warn-val"
+                class="font-mono text-[14px] text-amber-600 dark:text-amber-400 font-bold">80%</span>
+            </div>
+            <input id="slider-threshold-warn" type="range" min="50" max="95" value="80"
+              class="custom-slider slider-warn" style="--slider-fill: calc(8px + (100% - 16px) * 0.6667);" />
+            <span id="note-threshold-warn" class="text-[11px] text-on-surface-variant">Notifikasi visual saat mendekati
+              limit</span>
+          </div>
+
+          <!-- Slider 2: Critical 100% -->
+          <div
+            class="p-unit-3 rounded-xl bg-surface-container-low flex flex-col space-y-1.5 border border-slate-100 dark:border-slate-800">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                <span class="text-[13px] font-bold text-on-surface">Limit Kritis (Overbudget)</span>
+              </div>
+              <span id="threshold-crit-val"
+                class="font-mono text-[14px] text-red-600 dark:text-red-400 font-bold">100%</span>
+            </div>
+            <input id="slider-threshold-crit" type="range" min="90" max="110" value="100"
+              class="custom-slider slider-crit" style="--slider-fill: 50%;" />
+            <span id="note-threshold-crit" class="text-[11px] text-on-surface-variant">Peringatan visual &amp; haptik
+              saat tembus plafon</span>
+          </div>
+        </div>
+
+        <!-- Plafon Per Kategori List -->
+        <div class="flex flex-col space-y-unit-3">
+          <div class="flex items-center justify-between px-1">
+            <div>
+              <h2 class="font-bold text-[16px] text-on-surface">Plafon Per Kategori</h2>
+              <span class="text-[11px] text-on-surface-variant">Alokasi batas belanja per pos pengeluaran</span>
+            </div>
+            <button
+              class="px-3 h-8 rounded-xl bg-primary-fixed text-on-primary-fixed font-bold text-[12px] flex items-center gap-1 shadow-sm active-press"
+              onclick="UI.openModal('modal-add-category')" type="button">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Kategori</span>
+            </button>
+          </div>
+
+          <div id="budget-category-allocations" class="flex flex-col space-y-unit-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ==========================================
+           VIEW 5: PENGATURAN & KATEGORI
+           ========================================== -->
+      <section id="view-settings" class="hidden flex-col w-full space-y-unit-4">
+
+        <div class="flex flex-col">
+          <span class="text-[11px] font-bold text-primary tracking-wider uppercase">Konfigurasi FinFlow</span>
+          <h1 class="font-bold text-[22px] text-on-surface">Pengaturan & Data</h1>
+        </div>
+
+        <!-- User Profile Card -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex items-center justify-between border border-slate-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-[18px]">
+              W
+            </div>
+            <div>
+              <h3 class="font-bold text-[15px] text-on-surface">Wayang (Pengguna)</h3>
+              <p class="text-[12px] text-on-surface-variant">Mata Uang: IDR (Rupiah • Rp)</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-bold">Spark
+            Free</span>
+        </div>
+
+        <!-- Theme & Appearance Card (Dark Mode Controls) -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div
+                class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
+                <span class="material-symbols-outlined text-[22px]" id="theme-card-icon">dark_mode</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-[15px] text-on-surface">Tema Tampilan</h3>
+                <p class="text-[11px] text-on-surface-variant">Pilih mode tampilan warna aplikasi</p>
+              </div>
+            </div>
+            <span id="theme-active-label"
+              class="text-[11px] font-bold text-primary bg-primary-fixed/60 px-2.5 py-1 rounded-full">Sistem</span>
+          </div>
+
+          <!-- Theme Segmented Pill Selector -->
+          <div class="grid grid-cols-3 gap-1 pill-track p-1">
+            <button id="theme-btn-system"
+              class="theme-option-btn h-9 rounded-full text-[12px] font-semibold flex items-center justify-center gap-1.5 transition-all"
+              data-theme="system" type="button">
+              <span class="material-symbols-outlined text-[16px]">settings_brightness</span>
+              <span>Otomatis</span>
+            </button>
+            <button id="theme-btn-light"
+              class="theme-option-btn h-9 rounded-full text-[12px] font-semibold flex items-center justify-center gap-1.5 transition-all"
+              data-theme="light" type="button">
+              <span class="material-symbols-outlined text-[16px]">light_mode</span>
+              <span>Terang</span>
+            </button>
+            <button id="theme-btn-dark"
+              class="theme-option-btn h-9 rounded-full text-[12px] font-semibold flex items-center justify-center gap-1.5 transition-all"
+              data-theme="dark" type="button">
+              <span class="material-symbols-outlined text-[16px]">dark_mode</span>
+              <span>Gelap</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cloud Sync & Firebase Backend Section -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div
+                class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
+                <span class="material-symbols-outlined text-[22px]">cloud_sync</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-[15px] text-on-surface">Cloud Sync &amp; Database</h3>
+                <p id="cloud-sync-status-desc" class="text-[11px] text-on-surface-variant">Proyek: appkeuanganwyg</p>
+              </div>
+            </div>
+            <span id="cloud-sync-badge"
+              class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-bold text-[10px]">
+              Terkonfigurasi
+            </span>
+          </div>
+
+          <!-- Account & Connection Info Card -->
+          <div id="cloud-account-card"
+            class="p-3 rounded-xl bg-surface-container-low border border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="material-symbols-outlined text-[20px] text-primary">verified_user</span>
+              <div class="min-w-0">
+                <p id="cloud-user-id" class="text-[12px] font-bold text-on-surface truncate">Belum Terhubung ke Cloud
+                </p>
+                <p id="cloud-sync-time" class="text-[10px] text-on-surface-variant truncate">Data tersimpan aman di
+                  LocalStorage</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cloud Action Buttons -->
+          <div class="grid grid-cols-1 gap-2 pt-1">
+            <button id="btn-open-firebase-config"
+              class="h-11 rounded-xl bg-surface-container-low text-on-surface font-semibold text-[13px] flex items-center justify-center gap-2 active-press border border-slate-100"
+              type="button">
+              <span class="material-symbols-outlined text-[18px] text-primary">key</span>
+              <span>Konfigurasi Proyek Firebase</span>
+            </button>
+
+            <div class="grid grid-cols-2 gap-2" id="cloud-auth-buttons">
+              <button id="btn-sync-anonymous"
+                class="h-11 rounded-xl bg-primary text-white font-semibold text-[13px] flex items-center justify-center gap-1.5 active-press"
+                type="button">
+                <span class="material-symbols-outlined text-[18px]">sync</span>
+                <span>Sync Anonim (1-Klik)</span>
+              </button>
+              <button id="btn-sync-google"
+                class="h-11 rounded-xl bg-surface-container-low text-on-surface font-semibold text-[13px] flex items-center justify-center gap-1.5 active-press border border-slate-100"
+                type="button">
+                <span class="material-symbols-outlined text-[18px] text-error">login</span>
+                <span>Google Login</span>
+              </button>
+            </div>
+
+            <button id="btn-disconnect-cloud"
+              class="h-10 rounded-xl bg-error-container/50 text-on-error-container font-semibold text-[12px] hidden items-center justify-center gap-1.5 active-press"
+              type="button">
+              <span class="material-symbols-outlined text-[16px]">cloud_off</span>
+              <span>Putuskan Sinkronisasi Cloud</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Management Section -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-[15px] text-on-surface">Daftar Kategori</h3>
+              <p class="text-[11px] text-on-surface-variant">Kelola nama, ikon, dan warna kategori</p>
+            </div>
+            <button id="btn-add-category"
+              class="px-3 h-8 rounded-xl bg-primary text-white font-bold text-[12px] flex items-center gap-1 active-press"
+              type="button">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Tambah</span>
+            </button>
+          </div>
+
+          <div id="settings-category-list" class="flex flex-col gap-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Backup & Data Persistence Section -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col space-y-unit-3 border border-slate-100">
+          <h3 class="font-bold text-[15px] text-on-surface">Cadangan Data &amp; Reset</h3>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button id="btn-export-backup"
+              class="h-11 rounded-xl bg-surface-container-low text-on-surface font-semibold text-[13px] flex items-center justify-center gap-1.5 active-press border border-slate-100"
+              type="button">
+              <span class="material-symbols-outlined text-[18px] text-primary">cloud_download</span>
+              <span>Export JSON</span>
+            </button>
+            <button id="btn-import-backup"
+              class="h-11 rounded-xl bg-surface-container-low text-on-surface font-semibold text-[13px] flex items-center justify-center gap-1.5 active-press border border-slate-100"
+              type="button">
+              <span class="material-symbols-outlined text-[18px] text-secondary">upload_file</span>
+              <span>Import JSON</span>
+            </button>
+            <input id="input-import-backup" type="file" accept=".json" class="hidden" />
+          </div>
+        </div>
+
+        <!-- PRD Specs info -->
+        <div
+          class="p-unit-4 rounded-2xl bg-surface-container-low text-on-surface-variant text-[11px] leading-relaxed flex flex-col gap-1 border border-slate-100">
+          <p class="font-bold text-on-surface">FinFlow PWA v0.1 • MVP Release</p>
+          <p>Sesuai spesifikasi PRD: Single User, Manual Entry, Default Siklus Mingguan, Offline Persistence IndexedDB,
+            Firebase Firestore Data Schema Ready.</p>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- ==========================================
+         FIXED BOTTOM NAVIGATION BAR
+         ========================================== -->
+    <nav
+      class="fixed bottom-0 max-w-[480px] w-full z-40 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.04)] border-t border-slate-200/60">
+      <div class="flex justify-around items-center h-16 px-unit-2 relative">
+
+        <!-- Tab 1: Dashboard -->
+        <a aria-label="Dashboard"
+          class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 transition-colors text-primary active-press cursor-pointer"
+          data-path="dashboard" href="#">
+          <span class="material-symbols-outlined text-[24px]">dashboard</span>
+          <span class="text-[10px] font-bold mt-0.5">Dashboard</span>
+        </a>
+
+        <!-- Tab 2: Transaksi -->
+        <a aria-label="Transaksi"
+          class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors active-press cursor-pointer"
+          data-path="transaksi" href="#">
+          <span class="material-symbols-outlined text-[24px]">receipt_long</span>
+          <span class="text-[10px] font-bold mt-0.5">Transaksi</span>
+        </a>
+
+        <!-- Center Floating Action Button (FAB) -->
+        <div class="relative -top-4 flex items-center justify-center">
+          <a aria-label="Tambah Transaksi"
+            class="flex items-center justify-center w-[52px] h-[52px] rounded-full bg-primary text-white shadow-[0_8px_20px_rgba(0,108,73,0.38)] active:scale-90 transition-all ring-4 ring-white dark:ring-[#0f172a] hover:bg-surface-tint"
+            data-path="quick-entry" href="#">
+            <span class="material-symbols-outlined text-[28px]">add</span>
+          </a>
+        </div>
+
+        <!-- Tab 3: Budget -->
+        <a aria-label="Budget"
+          class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors active-press cursor-pointer"
+          data-path="budget" href="#">
+          <span class="material-symbols-outlined text-[24px]">donut_large</span>
+          <span class="text-[10px] font-bold mt-0.5">Budget</span>
+        </a>
+
+        <!-- Tab 4: Pengaturan -->
+        <a aria-label="Settings"
+          class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-14 h-14 text-on-surface-variant transition-colors active-press cursor-pointer"
+          data-path="settings" href="#">
+          <span class="material-symbols-outlined text-[24px]">tune</span>
+          <span class="text-[10px] font-bold mt-0.5">Settings</span>
+        </a>
+
+      </div>
+    </nav>
+
+  </div>
+
+
+  <!-- ==========================================
+       MODALS & OVERLAYS
+       ========================================== -->
+
+  <!-- Modal 1: Edit Transaction -->
+  <div id="modal-edit-tx"
+    class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div
+      class="w-full max-w-[480px] bg-white rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl flex flex-col gap-4 animate-slide-up">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-[18px] text-on-surface">Edit Transaksi</h3>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active-press"
+          data-close-modal="modal-edit-tx">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <input id="edit-tx-id" type="hidden" />
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Nominal (Rp)</label>
+        <input id="edit-tx-amount" type="text"
+          class="h-12 px-3 rounded-xl bg-surface-container-low font-bold text-[18px] text-on-surface outline-none border border-slate-200 tabular-nums" />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Kategori</label>
+        <select id="edit-tx-category"
+          class="h-12 px-3 rounded-xl bg-surface-container-low text-[14px] text-on-surface outline-none border border-slate-200">
+          <!-- Populated by JS -->
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Catatan / Keterangan</label>
+        <input id="edit-tx-note" type="text"
+          class="h-12 px-3 rounded-xl bg-surface-container-low text-[14px] text-on-surface outline-none border border-slate-200" />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Tanggal</label>
+        <input id="edit-tx-date" type="date"
+          class="h-12 px-3 rounded-xl bg-surface-container-low text-[14px] text-on-surface outline-none border border-slate-200" />
+      </div>
+
+      <div class="flex items-center gap-2 mt-2">
+        <button id="btn-delete-tx"
+          class="flex-1 h-12 rounded-xl bg-error-container text-on-error-container font-bold text-[14px] flex items-center justify-center gap-1 active-press"
+          type="button">
+          <span class="material-symbols-outlined text-[18px]">delete</span>
+          <span>Hapus</span>
+        </button>
+        <button id="btn-save-edit-tx"
+          class="flex-2 h-12 rounded-xl bg-primary text-white font-bold text-[14px] flex items-center justify-center gap-1 active-press px-6"
+          type="button">
+          <span class="material-symbols-outlined text-[18px]">check</span>
+          <span>Simpan Perubahan</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Edit Category Plafon Limit -->
+  <div id="modal-edit-cat-limit"
+    class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div
+      class="w-full max-w-[480px] bg-white rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl flex flex-col gap-4 animate-slide-up">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-[18px] text-on-surface">Atur Plafon Kategori</h3>
+          <p id="edit-cat-limit-name" class="text-[12px] text-on-surface-variant font-medium">Makanan &amp; Minuman</p>
+        </div>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active-press"
+          data-close-modal="modal-edit-cat-limit">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <input id="edit-cat-limit-id" type="hidden" />
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Batas Anggaran Periode Ini (Rp)</label>
+        <input id="edit-cat-limit-input" type="text"
+          class="h-12 px-3 rounded-xl bg-surface-container-low font-bold text-[18px] text-on-surface outline-none border border-slate-200 tabular-nums"
+          placeholder="1.000.000" />
+      </div>
+
+      <button id="btn-save-category-limit"
+        class="w-full h-12 rounded-xl bg-primary text-white font-bold text-[14px] flex items-center justify-center gap-1 active-press mt-2"
+        type="button">
+        <span class="material-symbols-outlined text-[18px]">check</span>
+        <span>Simpan Plafon</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal 3: Add Custom Category -->
+  <div id="modal-add-category"
+    class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div
+      class="w-full max-w-[480px] bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl flex flex-col gap-4 animate-slide-up max-h-[90vh] overflow-y-auto no-scrollbar">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-[18px] text-on-surface">Tambah Kategori Baru</h3>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active-press"
+          data-close-modal="modal-add-category">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <!-- Live Category Badge Preview -->
+      <div
+        class="flex items-center gap-3 p-3 rounded-2xl bg-surface-container-low dark:bg-slate-900/60 border border-slate-100 dark:border-slate-700/60">
+        <div id="new-cat-preview-box"
+          class="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-sm transition-all shrink-0"
+          style="background-color: #006c49;">
+          <span id="new-cat-preview-icon" class="material-symbols-outlined text-[24px]">volunteer_activism</span>
+        </div>
+        <div class="min-w-0 flex-1">
+          <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Pratinjau Kategori</span>
+          <p id="new-cat-preview-name" class="font-bold text-[15px] text-on-surface truncate">Donasi &amp; Zakat</p>
+        </div>
+      </div>
+
+      <!-- Category Type (Expense vs Income) -->
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider">Jenis Kategori</label>
+        <div class="flex items-center p-1 rounded-full bg-surface-container-low border border-slate-100 dark:border-slate-800">
+          <button type="button" id="btn-new-cat-expense" class="flex-1 py-1.5 rounded-full text-[12px] font-bold pill-btn-active transition-all cursor-pointer">Pengeluaran</button>
+          <button type="button" id="btn-new-cat-income" class="flex-1 py-1.5 rounded-full text-[12px] font-bold pill-btn-inactive transition-all cursor-pointer">Pemasukan</button>
+        </div>
+        <input type="hidden" id="new-cat-type" value="expense" />
+      </div>
+
+      <!-- Name Input -->
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider">Nama Kategori</label>
+        <input id="new-cat-name" type="text"
+          class="h-12 px-3.5 rounded-xl bg-surface-container-low text-[14px] text-on-surface outline-none border border-slate-200 dark:border-slate-700 placeholder:text-outline"
+          placeholder="Contoh: Donasi &amp; Zakat" value="Donasi &amp; Zakat" />
+      </div>
+
+      <!-- Curated Icon Selection Grid -->
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider">Pilih Ikon</label>
+        <input type="hidden" id="new-cat-icon" value="volunteer_activism" />
+        <div id="icon-picker-grid"
+          class="grid grid-cols-6 gap-2 p-2 rounded-xl bg-surface-container-low dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800">
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-primary dark:text-emerald-400 bg-white dark:bg-slate-800 shadow-sm ring-2 ring-primary active:scale-95 transition-all"
+            data-icon="volunteer_activism" title="Donasi/Amal">
+            <span class="material-symbols-outlined text-[20px]">volunteer_activism</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="school" title="Pendidikan">
+            <span class="material-symbols-outlined text-[20px]">school</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="pets" title="Peliharaan">
+            <span class="material-symbols-outlined text-[20px]">pets</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="flight" title="Liburan">
+            <span class="material-symbols-outlined text-[20px]">flight</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="fitness_center" title="Olahraga">
+            <span class="material-symbols-outlined text-[20px]">fitness_center</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="savings" title="Tabungan">
+            <span class="material-symbols-outlined text-[20px]">savings</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="local_cafe" title="Kopi &amp; Cafe">
+            <span class="material-symbols-outlined text-[20px]">local_cafe</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="redeem" title="Hadiah / Kado">
+            <span class="material-symbols-outlined text-[20px]">redeem</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="home" title="Kebutuhan Rumah">
+            <span class="material-symbols-outlined text-[20px]">home</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="directions_car" title="Kendaraan">
+            <span class="material-symbols-outlined text-[20px]">directions_car</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="sports_esports" title="Game / Hobi">
+            <span class="material-symbols-outlined text-[20px]">sports_esports</span>
+          </button>
+          <button type="button"
+            class="cat-icon-chip w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-white/60 dark:hover:bg-slate-800 active:scale-95 transition-all"
+            data-icon="category" title="Lainnya">
+            <span class="material-symbols-outlined text-[20px]">category</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Curated Color Swatches -->
+      <div class="flex flex-col gap-1.5">
+        <div class="flex items-center justify-between">
+          <label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider">Warna Aksen</label>
+          <span id="new-cat-hex-label"
+            class="text-[11px] font-mono text-on-surface-variant font-semibold">#006c49</span>
+        </div>
+
+        <div class="flex items-center justify-between gap-1.5 py-1">
+          <!-- Swatch 1: Emerald (Default) -->
+          <button type="button"
+            class="cat-color-swatch w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs ring-2 ring-offset-2 ring-primary dark:ring-offset-slate-800 active:scale-90 transition-all"
+            style="background-color: #006c49;" data-color="#006c49" title="Emerald">
+            <span class="material-symbols-outlined text-[16px] font-bold">check</span>
+          </button>
+          <!-- Swatch 2: Teal -->
+          <button type="button"
+            class="cat-color-swatch w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs active:scale-90 transition-all"
+            style="background-color: #0d9488;" data-color="#0d9488" title="Teal">
+            <span class="material-symbols-outlined text-[16px] font-bold hidden">check</span>
+          </button>
+          <!-- Swatch 3: Blue -->
+          <button type="button"
+            class="cat-color-swatch w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs active:scale-90 transition-all"
+            style="background-color: #2563eb;" data-color="#2563eb" title="Blue">
+            <span class="material-symbols-outlined text-[16px] font-bold hidden">check</span>
+          </button>
+          <!-- Swatch 4: Purple -->
+          <button type="button"
+            class="cat-color-swatch w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs active:scale-90 transition-all"
+            style="background-color: #7c3aed;" data-color="#7c3aed" title="Purple">
+            <span class="material-symbols-outlined text-[16px] font-bold hidden">check</span>
+          </button>
+          <!-- Swatch 5: Pink -->
+          <button type="button"
+            class="cat-color-swatch w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs active:scale-90 transition-all"
+            style="background-color: #db2777;" data-color="#db2777" title="Pink">
+            <span class="material-symbols-outlined text-[16px] font-bold hidden">check</span>
+          </button>
+          <!-- Swatch 6: Crimson -->
+          <button type="button"
+            class="cat-color-swatch w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs active:scale-90 transition-all"
+            style="background-color: #dc2626;" data-color="#dc2626" title="Red">
+            <span class="material-symbols-outlined text-[16px] font-bold hidden">check</span>
+          </button>
+          <!-- Swatch 7: Amber -->
+          <button type="button"
+            class="cat-color-swatch w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs active:scale-90 transition-all"
+            style="background-color: #d97706;" data-color="#d97706" title="Amber">
+            <span class="material-symbols-outlined text-[16px] font-bold hidden">check</span>
+          </button>
+
+          <!-- Custom Color Picker Circle (Rainbow Icon) -->
+          <div
+            class="relative w-9 h-9 rounded-full flex items-center justify-center bg-gradient-to-tr from-amber-400 via-rose-500 to-indigo-600 text-white shadow-xs cursor-pointer active:scale-90 transition-all"
+            title="Pilih Warna Kustom">
+            <span class="material-symbols-outlined text-[18px]">palette</span>
+            <input id="new-cat-color" type="color" value="#006c49"
+              class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-save-new-category"
+        class="w-full h-12 rounded-xl bg-primary text-white font-bold text-[14px] flex items-center justify-center gap-1.5 shadow-md shadow-primary/20 active-press transition-all mt-1"
+        type="button">
+        <span class="material-symbols-outlined text-[20px]">add</span>
+        <span>Tambah Kategori</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal 4: Payment Source Selector -->
+  <div id="modal-payment-source"
+    class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div
+      class="w-full max-w-[480px] bg-white rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl flex flex-col gap-3 animate-slide-up">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-[18px] text-on-surface">Pilih Sumber Dana</h3>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active-press"
+          data-close-modal="modal-payment-source">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 gap-2 pt-2">
+        <button
+          class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container active-press text-left"
+          onclick="UI.selectPaymentSource('QRIS / BCA')">
+          <div class="w-8 h-8 rounded-lg bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+          </div>
+          <div>
+            <p class="font-bold text-[14px] text-on-surface">QRIS / BCA</p>
+            <p class="text-[11px] text-on-surface-variant">Digital payment harian</p>
+          </div>
+        </button>
+        <button
+          class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container active-press text-left"
+          onclick="UI.selectPaymentSource('Tunai')">
+          <div
+            class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">payments</span>
+          </div>
+          <div>
+            <p class="font-bold text-[14px] text-on-surface">Tunai / Cash</p>
+            <p class="text-[11px] text-on-surface-variant">Uang fisik di dompet</p>
+          </div>
+        </button>
+        <button
+          class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container active-press text-left"
+          onclick="UI.selectPaymentSource('Debit Mandiri')">
+          <div class="w-8 h-8 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">credit_card</span>
+          </div>
+          <div>
+            <p class="font-bold text-[14px] text-on-surface">Debit Mandiri</p>
+            <p class="text-[11px] text-on-surface-variant">Kartu debit tabungan</p>
+          </div>
+        </button>
+        <button
+          class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container active-press text-left"
+          onclick="UI.selectPaymentSource('GoPay / OVO')">
+          <div class="w-8 h-8 rounded-lg bg-primary-container text-white flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">phone_iphone</span>
+          </div>
+          <div>
+            <p class="font-bold text-[14px] text-on-surface">E-Wallet (GoPay / OVO / ShopeePay)</p>
+            <p class="text-[11px] text-on-surface-variant">Saldo dompet elektronik</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Custom Date Range Picker -->
+  <div id="modal-custom-date"
+    class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div
+      class="w-full max-w-[480px] bg-white rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl flex flex-col gap-4 animate-slide-up">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-[18px] text-on-surface">Pilih Rentang Tanggal</h3>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active-press"
+          data-close-modal="modal-custom-date">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Tanggal Mulai</label>
+        <input id="custom-start-date" type="date"
+          class="h-12 px-3 rounded-xl bg-surface-container-low text-[14px] text-on-surface outline-none border border-slate-200" />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Tanggal Selesai</label>
+        <input id="custom-end-date" type="date"
+          class="h-12 px-3 rounded-xl bg-surface-container-low text-[14px] text-on-surface outline-none border border-slate-200" />
+      </div>
+
+      <button id="btn-apply-custom-date"
+        class="w-full h-12 rounded-xl bg-primary text-white font-bold text-[14px] flex items-center justify-center gap-1 active-press mt-2"
+        type="button">
+        <span class="material-symbols-outlined text-[18px]">check</span>
+        <span>Terapkan Rentang</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal 6: Firebase Cloud Configuration Setup -->
+  <div id="modal-firebase-config"
+    class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div
+      class="w-full max-w-[480px] bg-white rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl flex flex-col gap-4 animate-slide-up max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-[18px] text-on-surface">Konfigurasi Firebase</h3>
+          <p class="text-[12px] text-on-surface-variant">Hubungkan ke Firestore &amp; Auth (Spark Free Plan)</p>
+        </div>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active-press"
+          data-close-modal="modal-firebase-config">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div class="p-3 rounded-xl bg-primary-fixed/30 text-[11px] text-on-primary-fixed-variant leading-relaxed">
+        <strong>💡 Cara dapatkan konfigurasi:</strong> Buka <a href="https://console.firebase.google.com"
+          target="_blank" class="underline font-bold">Firebase Console</a> &gt; Project Settings &gt; General &gt; Your
+        apps &gt; Web app config. Salin nilai-nilai di bawah.
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">API Key <span
+            class="text-error">*</span></label>
+        <input id="firebase-cfg-api-key" type="text"
+          class="h-11 px-3 rounded-xl bg-surface-container-low font-mono text-[13px] text-on-surface outline-none border border-slate-200"
+          value="AIzaSyAuOdOajsBWi_v6LCxKjXnvUvKMHBoFpnA" />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Project ID <span
+            class="text-error">*</span></label>
+        <input id="firebase-cfg-project-id" type="text"
+          class="h-11 px-3 rounded-xl bg-surface-container-low font-mono text-[13px] text-on-surface outline-none border border-slate-200"
+          value="appkeuanganwyg" />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">Auth Domain (Opsional)</label>
+        <input id="firebase-cfg-auth-domain" type="text"
+          class="h-11 px-3 rounded-xl bg-surface-container-low font-mono text-[13px] text-on-surface outline-none border border-slate-200"
+          value="appkeuanganwyg.firebaseapp.com" />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold uppercase text-on-surface-variant">App ID (Opsional)</label>
+        <input id="firebase-cfg-app-id" type="text"
+          class="h-11 px-3 rounded-xl bg-surface-container-low font-mono text-[13px] text-on-surface outline-none border border-slate-200"
+          value="1:223963305768:web:f301bdae2b6372ce35221d" />
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex items-center gap-2 mt-1">
+        <button id="btn-demo-firebase-cfg"
+          class="flex-1 h-11 rounded-xl bg-surface-container-low text-on-surface text-[12px] font-semibold active-press border border-slate-100"
+          type="button">
+          Paste JSON Config
+        </button>
+        <button id="btn-save-firebase-cfg"
+          class="flex-1 h-11 rounded-xl bg-primary text-white text-[13px] font-bold flex items-center justify-center gap-1 active-press"
+          type="button">
+          <span class="material-symbols-outlined text-[18px]">save</span>
+          <span>Simpan Kunci</span>
+        </button>
+      </div>
+      <button id="btn-remove-firebase-cfg"
+        class="w-full h-10 rounded-xl text-error text-[12px] font-medium hover:bg-error-container/40 active-press hidden"
+        type="button">
+        Hapus Konfigurasi Firebase (Kembali ke Lokal)
+      </button>
+    </div>
+  </div>
+
+  <!-- Micro-Interaction Toast Notification Overlay -->
+  <div id="save-toast"
+    class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-full flex items-center gap-2 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 max-w-[90%]">
+    <span class="material-symbols-outlined text-[20px] text-primary-fixed">task_alt</span>
+    <span id="toast-message" class="text-[13px] font-medium truncate">Tersimpan secara lokal &amp; disinkronkan!</span>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/store.js"></script>
+  <script src="js/calculations.js"></script>
+  <script type="module" src="js/firebase.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
